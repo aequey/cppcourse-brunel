@@ -13,6 +13,8 @@ iostream
 -
 fstream
 -
+string
+-
 neuron.h
 /home/INTRANET/aequey/myfiles/cpp/Neuron_project/src/neuron.h
 constants.h
@@ -26,6 +28,8 @@ constants.h
 iostream
 -
 vector
+-
+cmath
 -
 
 /home/INTRANET/aequey/myfiles/cpp/Neuron_project/src/neuron.h

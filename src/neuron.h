@@ -13,10 +13,13 @@ public :
 	void update(const Time& dt);
 	double getMbPotential() const;
 	size_t getNbSpikes() const;
-	std::vector<double> getSpikeTimes() const;
+	std::vector<Time> getSpikeTimes() const;
 private :
 	double mbPotential;
-	std::vector<double> spikes;
+	std::vector<Time> spikes;
+	
+	bool isRefractory(const Time& currentTime);
+	//~ void updatePotential();
 };
 
 #endif // NEURON_H
