@@ -3,7 +3,7 @@
 
 # Relative path conversion top directories.
 set(CMAKE_RELATIVE_PATH_TOP_SOURCE "/home/antoineequey/myfiles/cpp/Neuron_project/src")
-set(CMAKE_RELATIVE_PATH_TOP_BINARY "/home/antoineequey/myfiles/cpp/Neuron_project/CMake")
+set(CMAKE_RELATIVE_PATH_TOP_BINARY "/home/antoineequey/myfiles/cpp/Neuron_project/build")
 
 # Force unix paths in dependencies.
 set(CMAKE_FORCE_UNIX_PATHS 1)

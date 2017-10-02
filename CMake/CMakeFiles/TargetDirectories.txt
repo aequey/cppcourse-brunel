@@ -1,3 +1,0 @@
-/home/antoineequey/myfiles/cpp/Neuron_project/CMake/CMakeFiles/edit_cache.dir
-/home/antoineequey/myfiles/cpp/Neuron_project/CMake/CMakeFiles/rebuild_cache.dir
-/home/antoineequey/myfiles/cpp/Neuron_project/CMake/CMakeFiles/test.dir

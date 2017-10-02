@@ -1,5 +1,5 @@
 #include <iostream>
-#include "neuron.cpp"
+#include "neuron.h"
 
 int main() {
 	
