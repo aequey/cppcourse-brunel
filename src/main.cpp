@@ -2,8 +2,7 @@
 #include "neuron.h"
 
 int main() {
-	
-	std::cout << "Test" << std::endl;
+	Neuron neuron;
 	
 	return 0;
 }

@@ -8,6 +8,8 @@ class Neuron {
 public :
 	Neuron();
 	~Neuron() = default;
+	
+	void update(const double& dt);
 private :
 	double mbPotential;
 	std::vector<double> spikes;
