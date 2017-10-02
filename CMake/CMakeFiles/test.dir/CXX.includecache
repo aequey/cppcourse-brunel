@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/antoineequey/myfiles/cpp/Neuron_project/src/main.cpp
+iostream
+-
+neuron.cpp
+/home/antoineequey/myfiles/cpp/Neuron_project/src/neuron.cpp
+
+/home/antoineequey/myfiles/cpp/Neuron_project/src/neuron.cpp
+neuron.h
+/home/antoineequey/myfiles/cpp/Neuron_project/src/neuron.h
+
+/home/antoineequey/myfiles/cpp/Neuron_project/src/neuron.h
+iostream
+-
+
