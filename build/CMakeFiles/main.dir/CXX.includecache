@@ -6,19 +6,31 @@
 
 #IncludeRegexTransform: 
 
+/home/INTRANET/aequey/myfiles/cpp/Neuron_project/src/constants.h
+
 /home/INTRANET/aequey/myfiles/cpp/Neuron_project/src/main.cpp
 iostream
 -
+fstream
+-
 neuron.h
 /home/INTRANET/aequey/myfiles/cpp/Neuron_project/src/neuron.h
+constants.h
+/home/INTRANET/aequey/myfiles/cpp/Neuron_project/src/constants.h
 
 /home/INTRANET/aequey/myfiles/cpp/Neuron_project/src/neuron.cpp
 neuron.h
 /home/INTRANET/aequey/myfiles/cpp/Neuron_project/src/neuron.h
+constants.h
+/home/INTRANET/aequey/myfiles/cpp/Neuron_project/src/constants.h
 iostream
+-
+vector
 -
 
 /home/INTRANET/aequey/myfiles/cpp/Neuron_project/src/neuron.h
+constants.h
+/home/INTRANET/aequey/myfiles/cpp/Neuron_project/src/constants.h
 iostream
 -
 vector

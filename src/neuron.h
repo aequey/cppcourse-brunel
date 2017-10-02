@@ -1,6 +1,7 @@
 #ifndef NEURON_H
 #define NEURON_H
 
+#include "constants.h"
 #include <iostream>
 #include <vector>
 
@@ -9,7 +10,10 @@ public :
 	Neuron();
 	~Neuron() = default;
 	
-	void update(const double& dt);
+	void update(const Time& dt);
+	double getMbPotential() const;
+	size_t getNbSpikes() const;
+	std::vector<double> getSpikeTimes() const;
 private :
 	double mbPotential;
 	std::vector<double> spikes;
