@@ -32,20 +32,11 @@ void Neuron::update(const Time& currentTime, const double& extI) {
 	mbPotential = nextPotential;
 	if (isRefractory(currentTime)) {
 		mbPotential = 0.0;
-	} else if(mbPotential >= constants::SPIKE_THRESHOLD) {
+	} else if(mbPotential > constants::SPIKE_THRESHOLD-0.0001) {
 		mbPotential = constants::SPIKE_THRESHOLD;
 		spikes.push_back(currentTime);
 	}
 		updatePotential(extI);
-	//~ } else if (mbPotential < constants::SPIKE_THRESHOLD-0.00009) {
-		//~ updatePotential(extI);
-		//~ if (mbPotential > constants::SPIKE_THRESHOLD) {
-			//~ mbPotential = constants::SPIKE_THRESHOLD;
-		//~ }
-	//~ } else { 
-		//~ spikes.push_back(currentTime);
-		//~ mbPotential = constants::SPIKE_THRESHOLD;
-	//~ }
 }
 
 void Neuron::updatePotential(const double& extI) {

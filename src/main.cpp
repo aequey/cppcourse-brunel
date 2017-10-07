@@ -10,7 +10,7 @@ void storeInFile(double toStore, std::ofstream& out);
 
 int main() {
 	
-	const double extI(21.0);
+	const double extI(20.5);
 	const Time extIBeginning(100);
 	const Time extIEnd(900);
 	
