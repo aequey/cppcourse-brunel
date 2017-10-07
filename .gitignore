@@ -1,5 +1,5 @@
 /build/*
-/res/*
+/res/potentials.txt
 
 # Prerequisites
 *.d
