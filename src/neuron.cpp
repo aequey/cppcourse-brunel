@@ -41,5 +41,5 @@ void Neuron::update(const Time& currentTime, const double& extI) {
 
 void Neuron::updatePotential(const double& extI) {
 	double factor(exp(-constants::H/constants::TAU));
-	nextPotential = factor*mbPotential + extI*constants::MB_RESISTANCE/constants::TAU*(1-factor);
+	nextPotential = factor*mbPotential + extI*constants::MB_RESISTANCE*(1-factor);
 }
