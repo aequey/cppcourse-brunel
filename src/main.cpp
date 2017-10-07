@@ -10,7 +10,7 @@ void storeInFile(double toStore, std::ofstream& out);
 
 int main() {
 	
-	const double extI(7.0);
+	const double extI(21.0);
 	const Time extIBeginning(100);
 	const Time extIEnd(900);
 	
@@ -25,7 +25,7 @@ int main() {
 		} else {
 			currentImput = 0.0;
 		}
-		//~ neuron.update();
+		neuron.update(currentTime, currentImput);
 
 		storeInFile(neuron.getMbPotential(), file);
 		currentTime+=constants::H;
@@ -44,7 +44,7 @@ bool isInInterval(Time toTest, Time min, Time max) {
 void storeInFile(double toStore, std::ofstream& out) {
 	//~ std::ofstream out;
 	//~ out.open(fileName);
-	out << toStore << ' ';
+	out << toStore <<std::endl;
 	//~ out.close();
 }
 

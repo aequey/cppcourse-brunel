@@ -10,16 +10,17 @@ public :
 	Neuron();
 	~Neuron() = default;
 	
-	void update(const Time& dt);
+	void update(const Time& dt, const double& extI);
 	double getMbPotential() const;
 	size_t getNbSpikes() const;
 	std::vector<Time> getSpikeTimes() const;
 private :
 	double mbPotential;
+	double nextPotential;
 	std::vector<Time> spikes;
 	
 	bool isRefractory(const Time& currentTime);
-	//~ void updatePotential();
+	void updatePotential(const double& extI);
 };
 
 #endif // NEURON_H

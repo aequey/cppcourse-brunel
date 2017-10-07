@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/home/INTRANET/aequey/myfiles/cpp/Neuron_project/src/constants.h
+/home/antoineequey/myfiles/cpp/Neuron_project/src/constants.h
 
-/home/INTRANET/aequey/myfiles/cpp/Neuron_project/src/main.cpp
+/home/antoineequey/myfiles/cpp/Neuron_project/src/main.cpp
 iostream
 -
 fstream
@@ -16,15 +16,15 @@ fstream
 string
 -
 neuron.h
-/home/INTRANET/aequey/myfiles/cpp/Neuron_project/src/neuron.h
+/home/antoineequey/myfiles/cpp/Neuron_project/src/neuron.h
 constants.h
-/home/INTRANET/aequey/myfiles/cpp/Neuron_project/src/constants.h
+/home/antoineequey/myfiles/cpp/Neuron_project/src/constants.h
 
-/home/INTRANET/aequey/myfiles/cpp/Neuron_project/src/neuron.cpp
+/home/antoineequey/myfiles/cpp/Neuron_project/src/neuron.cpp
 neuron.h
-/home/INTRANET/aequey/myfiles/cpp/Neuron_project/src/neuron.h
+/home/antoineequey/myfiles/cpp/Neuron_project/src/neuron.h
 constants.h
-/home/INTRANET/aequey/myfiles/cpp/Neuron_project/src/constants.h
+/home/antoineequey/myfiles/cpp/Neuron_project/src/constants.h
 iostream
 -
 vector
@@ -32,9 +32,9 @@ vector
 cmath
 -
 
-/home/INTRANET/aequey/myfiles/cpp/Neuron_project/src/neuron.h
+/home/antoineequey/myfiles/cpp/Neuron_project/src/neuron.h
 constants.h
-/home/INTRANET/aequey/myfiles/cpp/Neuron_project/src/constants.h
+/home/antoineequey/myfiles/cpp/Neuron_project/src/constants.h
 iostream
 -
 vector
