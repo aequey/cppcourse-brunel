@@ -2,15 +2,16 @@
 #define NEURON_H
 
 #include "constants.h"
-#include <iostream>
+#include "simulation.h"
 #include <vector>
+
 
 class Neuron {
 public :
 	Neuron();
 	~Neuron() = default;
 	
-	void update(const Time& dt, const double& extI);
+	void update(const double& extI, const Simulation& sim);
 	double getMbPotential() const;
 	size_t getNbSpikes() const;
 	std::vector<Time> getSpikeTimes() const;
@@ -20,7 +21,7 @@ private :
 	std::vector<Time> spikes;
 	
 	bool isRefractory(const Time& currentTime);
-	void updatePotential(const double& extI);
+	void updatePotential(const double& extI, const Simulation& sim);
 };
 
 #endif // NEURON_H
