@@ -4,8 +4,9 @@
 typedef double Time;
 
 namespace constants {
-	const Time SIM_TIME(1000.0); // ms
-	const Time H(0.5);
+	const Time SIM_TIME(500.0); // ms
+	const Time H(0.1); // ms
+	const int SIM_STEP(SIM_TIME/H);
 	const Time REFRACTORY_TIME(2.0); // ms
 	const double SPIKE_THRESHOLD(20.0); // mV
 	const double RESET_POTENTIAL(0.0); // mV Can use 10.0 as well (10.0 is given in the paper)

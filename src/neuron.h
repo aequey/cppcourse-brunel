@@ -5,6 +5,7 @@
 #include "simulation.h"
 #include <vector>
 
+class Simulation;
 
 class Neuron {
 public :
