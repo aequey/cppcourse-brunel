@@ -5,7 +5,7 @@ typedef double Time;
 
 namespace constants {
 	const Time SIM_TIME(500.0); // ms
-	const Time H(0.1); // ms
+	const Time H(0.5); // ms
 	const int SIM_STEP(SIM_TIME/H);
 	const Time REFRACTORY_TIME(2.0); // ms
 	const double SPIKE_THRESHOLD(20.0); // mV

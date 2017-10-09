@@ -12,14 +12,15 @@ public :
 	Neuron();
 	~Neuron() = default;
 	
-	void update(const double& extI, const Simulation& sim);
+	void update(const double& extI, const Simulation& sim, const Time& stopTime);
 	double getMbPotential() const;
-	size_t getNbSpikes() const;
-	std::vector<Time> getSpikeTimes() const;
+	unsigned int getNbSpikes() const;
+	Time getSpikeTime() const;
 private :
 	double mbPotential;
-	double nextPotential;
-	std::vector<Time> spikes;
+	unsigned int nbSpikes;
+	Time lastSpike;
+	Time currentTime;
 	
 	bool isRefractory(const Time& currentTime);
 	void updatePotential(const double& extI, const Simulation& sim);

@@ -56,7 +56,7 @@ void Simulation::simulateANeuron(const double& extI, const Time& extIBeginning, 
 		} else {
 			currentImput = 0.0;
 		}
-		neuron.update(currentImput, *this);
+		neuron.update(currentImput, *this, currentTime_+constants::H);
 
 		storeInFile(neuron.getMbPotential(), file);
 		currentTime_ += constants::H;
@@ -80,7 +80,7 @@ void Simulation::simulateTwoNeurons(const double& extI, const Time& extIBeginnin
 			currentImput = 0.0;
 		}
 		for (auto& neur:neurons) {
-			neur->update(currentImput, *this);
+			neur->update(currentImput, *this, currentTime_+constants::H);
 		}
 		storeInFile(neurons, file);
 		currentTime_ += constants::H;
@@ -90,6 +90,7 @@ void Simulation::simulateTwoNeurons(const double& extI, const Time& extIBeginnin
 		delete neur;
 		neur = nullptr;
 	}
+	neurons.clear();
 }
 
 void Simulation::initNeurons(std::vector<Neuron*>& neurons, size_t nb) {
