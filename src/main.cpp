@@ -5,8 +5,8 @@
 int main() {
 	
 	const double extI(10);
-	const Time extIBeginning(100);
-	const Time extIEnd(400);
+	const Milliseconds extIBeginning(100);
+	const Milliseconds extIEnd(400);
 	
 	Simulation sim;
 	//~ sim.simulateANeuron(extI, extIBeginning, extIEnd);

@@ -22,7 +22,7 @@ private :
 	Time lastSpike;
 	Time currentTime;
 	
-	bool isRefractory(const Time& currentTime);
+	bool isRefractory();
 	void updatePotential(const double& extI);
 };
 

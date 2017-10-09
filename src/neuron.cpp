@@ -2,13 +2,13 @@
 #include "constants.h"
 #include "simulation.h"
 #include <vector>
-#include <iostream>
+//~ #include <iostream>
 
 Neuron::Neuron()
 	: mbPotential(constants::RESET_POTENTIAL),
 	  nbSpikes(0),
-	  lastSpike(0.0),
-	  currentTime(0.0) {}
+	  lastSpike(0),
+	  currentTime(0) {}
 
 double Neuron::getMbPotential() const {
 	return mbPotential;
@@ -24,9 +24,9 @@ Time Neuron::getSpikeTime() const {
 }
 
 
-bool Neuron::isRefractory(const Time& currentTime) {
+bool Neuron::isRefractory() {
 	if (nbSpikes>0) {
-		return currentTime < (lastSpike+constants::REFRACTORY_TIME);
+		return currentTime < (lastSpike+constants::REFRACTORY_STEP);
 	} else {
 		return false;
 	}
@@ -34,11 +34,11 @@ bool Neuron::isRefractory(const Time& currentTime) {
 
 void Neuron::update(const double& extI, const Time& stopTime) {
 	while (currentTime<stopTime) {
-		if (!(mbPotential<constants::SPIKE_THRESHOLD)) {
+		if (mbPotential>constants::SPIKE_THRESHOLD) {
 			lastSpike = currentTime;
 			++nbSpikes;
 		}
-		if (isRefractory(currentTime)) {
+		if (isRefractory()) {
 			mbPotential=0.0;
 		} else {
 			updatePotential(extI);
@@ -50,6 +50,5 @@ void Neuron::update(const double& extI, const Time& stopTime) {
 void Neuron::updatePotential(const double& extI) {
 	mbPotential = constants::FACTOR1*mbPotential + extI*constants::FACTOR2;
 	if (mbPotential>constants::SPIKE_THRESHOLD) {
-		mbPotential=constants::SPIKE_THRESHOLD;
 	}
 }

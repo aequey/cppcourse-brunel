@@ -2,28 +2,29 @@
 #include "constants.h"
 #include "neuron.h"
 #include <fstream>
-#include <iostream>
+//~ #include <iostream>
 #include <vector>
 #include <cmath>
 #include <cassert>
 
 Simulation::Simulation()
-	: Simulation(constants::SIM_TIME, "../res/potentials.txt") {}
+	: Simulation(constants::TOTAL_STEP, "../res/potentials.txt") {}
 	
-Simulation::Simulation(const Time& simulationTime, const std::string& storeName)
-	: currentTime_(0.0),
-	  simulationTime_(simulationTime),
+Simulation::Simulation(const Milliseconds& simulationTime, const std::string& storeName)
+	: currentTime_(0),
+	  simulationTime_(simulationTime/constants::SIM_STEP),
 	  storingFile_(storeName) {
 		  
-	  assert(simulationTime>=0.0);
+	  assert(simulationTime>=0);
 }
 
 Time Simulation::getCurrentTime() const {
 	return currentTime_;
 }
 
-bool Simulation::isInInterval(Time toTest, Time min, Time max) {
-	return (toTest >= min and toTest < max);
+bool Simulation::isInInterval(Time toTest, Milliseconds min, Milliseconds max) {
+	double test(toTest*constants::SIM_STEP);
+	return (!(test < min) and test < max);
 }
 
 void Simulation::storeInFile(double toStore, std::ofstream& out) {
@@ -37,7 +38,7 @@ void Simulation::storeInFile(const std::vector<Neuron*>& neurons, std::ofstream&
 	out << '\n';
 }
 
-void Simulation::simulateANeuron(const double& extI, const Time& extIBeginning, const Time& extIEnd) {
+void Simulation::simulateANeuron(const double& extI, const Milliseconds& extIBeginning, const Milliseconds& extIEnd) {
 	Neuron neuron;
 	double currentImput(0.0);
 	std::ofstream file;
