@@ -26,13 +26,13 @@ Time Neuron::getSpikeTime() const {
 
 bool Neuron::isRefractory() {
 	if (nbSpikes>0) {
-		return currentTime < (lastSpike+constants::REFRACTORY_STEP);
+		return currentTime < (lastSpike+refractoryStep);
 	} else {
 		return false;
 	}
 }
 
-void Neuron::update(const double& extI, const Time& stopTime) {
+bool Neuron::update(const double& extI, const Time& stopTime) {
 	while (currentTime<stopTime) {
 		if (mbPotential>constants::SPIKE_THRESHOLD) {
 			lastSpike = currentTime;
@@ -48,7 +48,10 @@ void Neuron::update(const double& extI, const Time& stopTime) {
 }
 
 void Neuron::updatePotential(const double& extI) {
-	mbPotential = constants::FACTOR1*mbPotential + extI*constants::FACTOR2;
-	if (mbPotential>constants::SPIKE_THRESHOLD) {
-	}
+	mbPotential = ODEFactor1*mbPotential + extI*ODEFactor2 + nextJ;
+	nextJ = 0.0;
+}
+
+void Neuron::receiveSpike(const double& amplitude) {
+	nextJ+=amplitude;
 }

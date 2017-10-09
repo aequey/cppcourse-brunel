@@ -8,7 +8,7 @@
 #include <cassert>
 
 Simulation::Simulation()
-	: Simulation(constants::TOTAL_STEP, "../res/potentials.txt") {}
+	: Simulation(totalStep, "../res/potentials.txt") {}
 	
 Simulation::Simulation(const Milliseconds& simulationTime, const std::string& storeName)
 	: currentTime_(0),
@@ -74,7 +74,13 @@ void Simulation::simulateTwoNeurons(const double& extI, const Time& extIBeginnin
 			currentImput = 0.0;
 		}
 		for (auto& neur:neurons) {
-			neur->update(currentImput, currentTime_+constants::H);
+			if (neur->update(currentImput, currentTime_+constants::H)) {
+				for (auto& neuron:neurons) {
+					if (neuron != neur) {
+						neuron->receiveSpike(constants::J);
+					}
+				}
+			}
 		}
 		storeInFile(neurons, file);
 		currentTime_ += constants::H;

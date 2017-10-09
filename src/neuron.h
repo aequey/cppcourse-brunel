@@ -12,16 +12,25 @@ public :
 	Neuron();
 	~Neuron() = default;
 	
-	void update(const double& extI, const Time& stopTime);
+	bool update(const double& extI, const Time& stopTime);
+	void receiveSpike(const double& amplitude);
+	
 	double getMbPotential() const;
 	unsigned int getNbSpikes() const;
 	Time getSpikeTime() const;
 private :
 	double mbPotential;
+	double nextJ;
 	unsigned int nbSpikes;
 	Time lastSpike;
 	Time currentTime;
 	
+	
+	static constexpr Time refractoryStep = (constants::REFRACTORY_TIME/constants::SIM_STEP);
+	static constexpr double mbResistance = (constants::TAU/constants::C);
+	static constexpr double ODEFactor1 = (exp(-constants::SIM_STEP/constants::TAU));
+	static constexpr double ODEFactor2 = (mbResistance*(1-ODEFactor1));
+
 	bool isRefractory();
 	void updatePotential(const double& extI);
 };

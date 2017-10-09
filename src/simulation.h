@@ -23,6 +23,8 @@ private :
 	const Time simulationTime_;
 	std::string storingFile_;
 	
+	static constexpr Time totalStep = (constants::SIM_TIME/constants::SIM_STEP);
+	
 	bool isInInterval(Milliseconds toTest, Milliseconds min, Milliseconds max);
 	void storeInFile(double toStore, std::ofstream& out);
 	void storeInFile(const std::vector<Neuron*>& neurons, std::ofstream& out);
