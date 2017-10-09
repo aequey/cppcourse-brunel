@@ -32,7 +32,7 @@ bool Neuron::isRefractory(const Time& currentTime) {
 	}
 }
 
-void Neuron::update(const double& extI, const Simulation& sim, const Time& stopTime) {
+void Neuron::update(const double& extI, const Time& stopTime) {
 	while (currentTime<stopTime) {
 		if (!(mbPotential<constants::SPIKE_THRESHOLD)) {
 			lastSpike = currentTime;
@@ -41,14 +41,14 @@ void Neuron::update(const double& extI, const Simulation& sim, const Time& stopT
 		if (isRefractory(currentTime)) {
 			mbPotential=0.0;
 		} else {
-			updatePotential(extI, sim);
+			updatePotential(extI);
 		}
 		currentTime+=constants::H;	
 	}	
 }
 
-void Neuron::updatePotential(const double& extI, const Simulation& sim) {
-	mbPotential = sim.getFactor1()*mbPotential + extI*sim.getFactor2();
+void Neuron::updatePotential(const double& extI) {
+	mbPotential = constants::FACTOR1*mbPotential + extI*constants::FACTOR2;
 	if (mbPotential>constants::SPIKE_THRESHOLD) {
 		mbPotential=constants::SPIKE_THRESHOLD;
 	}

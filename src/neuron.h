@@ -12,7 +12,7 @@ public :
 	Neuron();
 	~Neuron() = default;
 	
-	void update(const double& extI, const Simulation& sim, const Time& stopTime);
+	void update(const double& extI, const Time& stopTime);
 	double getMbPotential() const;
 	unsigned int getNbSpikes() const;
 	Time getSpikeTime() const;
@@ -23,7 +23,7 @@ private :
 	Time currentTime;
 	
 	bool isRefractory(const Time& currentTime);
-	void updatePotential(const double& extI, const Simulation& sim);
+	void updatePotential(const double& extI);
 };
 
 #endif // NEURON_H

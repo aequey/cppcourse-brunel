@@ -1,6 +1,8 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#include <cmath>
+
 typedef double Time;
 
 namespace constants {
@@ -13,6 +15,9 @@ namespace constants {
 	const Time TAU(20.0); // ms
 	const double C(1.0);
 	const double MB_RESISTANCE(TAU/C);
+	const double FACTOR1 (exp(-H/TAU));
+	const double FACTOR2 (MB_RESISTANCE*(1-FACTOR1));
+
 }
 
 

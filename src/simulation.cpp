@@ -13,21 +13,13 @@ Simulation::Simulation()
 Simulation::Simulation(const Time& simulationTime, const std::string& storeName)
 	: currentTime_(0.0),
 	  simulationTime_(simulationTime),
-	  storingFile_(storeName),
-	  calculationFactor1_(exp(-constants::H/constants::TAU)),
-	  calculationFactor2_(constants::MB_RESISTANCE*(1-calculationFactor1_)) {
-	assert(simulationTime>=0.0);
+	  storingFile_(storeName) {
+		  
+	  assert(simulationTime>=0.0);
 }
 
 Time Simulation::getCurrentTime() const {
 	return currentTime_;
-}
-
-double Simulation::getFactor1() const {
-	return calculationFactor1_;
-}
-double Simulation::getFactor2() const {
-	return calculationFactor2_;
 }
 
 bool Simulation::isInInterval(Time toTest, Time min, Time max) {
@@ -56,7 +48,7 @@ void Simulation::simulateANeuron(const double& extI, const Time& extIBeginning, 
 		} else {
 			currentImput = 0.0;
 		}
-		neuron.update(currentImput, *this, currentTime_+constants::H);
+		neuron.update(currentImput, currentTime_+constants::H);
 
 		storeInFile(neuron.getMbPotential(), file);
 		currentTime_ += constants::H;
@@ -68,8 +60,9 @@ void Simulation::simulateANeuron(const double& extI, const Time& extIBeginning, 
 void Simulation::simulateTwoNeurons(const double& extI, const Time& extIBeginning, const Time& extIEnd) {
 	std::vector<Neuron*> neurons;
 	initNeurons(neurons, 2);
-	std::cout << neurons.size();
+	
 	double currentImput(0.0);
+	
 	std::ofstream file;
 	file.open(storingFile_);
 	
@@ -80,7 +73,7 @@ void Simulation::simulateTwoNeurons(const double& extI, const Time& extIBeginnin
 			currentImput = 0.0;
 		}
 		for (auto& neur:neurons) {
-			neur->update(currentImput, *this, currentTime_+constants::H);
+			neur->update(currentImput, currentTime_+constants::H);
 		}
 		storeInFile(neurons, file);
 		currentTime_ += constants::H;
