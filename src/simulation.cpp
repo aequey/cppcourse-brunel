@@ -93,6 +93,44 @@ void Simulation::simulateTwoNeurons(const double& extI, const Time& extIBeginnin
 	neurons.clear();
 }
 
+//~ void Simulation::simulateTwoNeurons(const double& extI, const Time& extIBeginning, const Time& extIEnd) {
+	//~ std::vector<Neuron*> neurons;
+	//~ initNeurons(neurons, 2);
+	
+	//~ double currentImput(0.0);
+	
+	//~ std::ofstream file;
+	//~ file.open(storingFile_);
+	
+	//~ while (currentTime_ <= simulationTime_) {
+		//~ if (isInInterval(currentTime_, extIBeginning, extIEnd)) {
+			//~ currentImput = extI;
+		//~ } else {
+			//~ currentImput = 0.0;
+		//~ }
+		
+		//~ for (auto& neur:neurons) {
+			//~ if (neur->update(currentImput, currentTime_+constants::H)) {
+				//~ for (auto& neuron:neurons) {
+					//~ if (neuron != neur) {
+						//~ neuron->receiveSpike(constants::J);
+					//~ }
+				//~ }
+			//~ }
+		//~ }
+		//~ storeInFile(neurons, file);
+		//~ currentTime_ += constants::H;
+	//~ }
+	//~ file.close();
+	//~ for(auto& neur:neurons) {
+		//~ delete neur;
+		//~ neur = nullptr;
+	//~ }
+	//~ neurons.clear();
+//~ }
+
+
+
 void Simulation::initNeurons(std::vector<Neuron*>& neurons, size_t nb) {
 	assert(neurons.size()==0);
 	for(size_t i(0); i<nb; ++i) {
