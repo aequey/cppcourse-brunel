@@ -3,7 +3,7 @@
 
 #include "constants.h"
 #include "simulation.h"
-#include <vector>
+#include <array>
 
 class Simulation;
 
@@ -13,18 +13,18 @@ public :
 	~Neuron() = default;
 	
 	bool update(const double& extI, const Time& stopTime);
-	void receiveSpike(const double& amplitude);
+	void receiveSpike(const double& amplitude, const Time & delay);
 	
 	double getMbPotential() const;
 	unsigned int getNbSpikes() const;
 	Time getSpikeTime() const;
 private :
 	double mbPotential;
-	double J;
 	unsigned int nbSpikes;
 	Time lastSpike;
 	Time currentTime;
-	
+	std::array<double, constants::D_IN_STEP+1> buffer;
+	//~ unsigned int timeInBuffer;
 	
 	static constexpr Time refractoryStep = (constants::REFRACTORY_TIME/constants::H);
 	static constexpr double mbResistance = (constants::TAU/constants::C);
@@ -32,7 +32,8 @@ private :
 	static constexpr double ODEFactor2 = (mbResistance*(1-ODEFactor1));
 
 	bool isRefractory();
-	void updatePotential(const double& extI);
+	void updatePotential(const double& extI, const double& J);
+	unsigned int inBuffer(const Time&) const;
 };
 
 #endif // NEURON_H

@@ -5,7 +5,7 @@
 #include <cassert>
 
 typedef double Milliseconds;
-typedef double Time;
+typedef unsigned int Time;
 
 namespace constants {
 	constexpr Milliseconds SIM_TIME(500.0); // [ms]
@@ -15,7 +15,8 @@ namespace constants {
 	const double SPIKE_THRESHOLD(20.0); // [mV]
 	const double RESET_POTENTIAL(0.0); // [mV] Can use 10.0 as well (10.0 is given in the paper)
 	const double J(0.1); // [mV] Amplitude of the spike
-	const double D(1.5); // [ms] Delay of the spike
+	const double D(1.0); // [ms] Delay of the spike
+	const Time D_IN_STEP(D/H);
 	constexpr Milliseconds TAU(20.0); // [ms]
 	constexpr double C(1.0); // [mA]
 }

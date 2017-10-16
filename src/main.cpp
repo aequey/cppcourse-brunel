@@ -5,7 +5,7 @@
 int main() {
 	
 	const double extI(1.01);
-	const Milliseconds extIBeginning(0.0);
+	const Milliseconds extIBeginning(100.0);
 	const Milliseconds extIEnd(400.0);
 	
 	Simulation sim;

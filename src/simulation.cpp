@@ -92,7 +92,7 @@ void Simulation::simulateANeuron(const double& extI, const Milliseconds& extIBeg
 	//~ neurons.clear();
 //~ }
 
-void Simulation::simulateTwoNeurons(const double& extI, const Time& extIBeginning, const Time& extIEnd) {
+void Simulation::simulateTwoNeurons(const double& extI, const Milliseconds& extIBeginning, const Milliseconds& extIEnd) {
 	Neuron n1;
 	Neuron n2;
 	
@@ -113,7 +113,7 @@ void Simulation::simulateTwoNeurons(const double& extI, const Time& extIBeginnin
 		spike = n1.update(currentImput, currentTime_+1);
 		
 		if (spike) {
-			n2.receiveSpike(constants::J);
+			n2.receiveSpike(constants::J, constants::D_IN_STEP);
 		}
 		n2.update(0.0, currentTime_+1);
 		

@@ -1,14 +1,17 @@
 #include "neuron.h"
 #include "constants.h"
 #include "simulation.h"
-#include <vector>
 
 Neuron::Neuron()
 	: mbPotential(constants::RESET_POTENTIAL),
-	  J(0.0),
 	  nbSpikes(0),
 	  lastSpike(0),
-	  currentTime(0) {}
+	  currentTime(0) {
+	  //~ timeInBuffer(0) {
+		  for (auto& J:buffer) {
+			  J=0.0;
+		  }
+	  }
 
 double Neuron::getMbPotential() const {
 	return mbPotential;
@@ -33,28 +36,33 @@ bool Neuron::isRefractory() {
 }
 
 bool Neuron::update(const double& extI, const Time& stopTime) {
-	bool spike(false);
+	double J(buffer[inBuffer(currentTime)]);
+	bool spiked(false);
 	while (currentTime<stopTime) {
 		if (mbPotential>constants::SPIKE_THRESHOLD) {
 			lastSpike = currentTime;
 			++nbSpikes;
-			spike = true;
+			spiked = true;
 		}
 		if (isRefractory()) {
 			mbPotential=0.0;
 		} else {
-			updatePotential(extI);
+			updatePotential(extI, J);
 		}
-		++currentTime;	
+		buffer[inBuffer(currentTime)]=0.0;
+		++currentTime;
 	}
-	return spike;
+	return spiked;
 }
 
-void Neuron::updatePotential(const double& extI) {
+void Neuron::updatePotential(const double& extI, const double& J) {
 	mbPotential = ODEFactor1*mbPotential + extI*ODEFactor2 + J;
-	J = 0.0;
 }
 
-void Neuron::receiveSpike(const double& amplitude) {
-	J+=amplitude;
+void Neuron::receiveSpike(const double& amplitude, const Time& delay) {
+	buffer[inBuffer(currentTime+delay)]+=amplitude;
+}
+
+unsigned int Neuron::inBuffer(const Time& time) const {
+	return time % (buffer.size());
 }
