@@ -23,7 +23,7 @@ private :
 	const Time simulationTime_;
 	std::string storingFile_;
 	
-	static constexpr Time totalStep = (constants::SIM_TIME/constants::SIM_STEP);
+	static constexpr Time totalStep = (constants::SIM_TIME/constants::H);
 	
 	bool isInInterval(Milliseconds toTest, Milliseconds min, Milliseconds max);
 	void storeInFile(double toStore, std::ofstream& out);

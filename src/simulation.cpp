@@ -2,7 +2,6 @@
 #include "constants.h"
 #include "neuron.h"
 #include <fstream>
-//~ #include <iostream>
 #include <vector>
 #include <cmath>
 #include <cassert>
@@ -12,7 +11,7 @@ Simulation::Simulation()
 	
 Simulation::Simulation(const Milliseconds& simulationTime, const std::string& storeName)
 	: currentTime_(0),
-	  simulationTime_(simulationTime/constants::SIM_STEP),
+	  simulationTime_(simulationTime/constants::H),
 	  storingFile_(storeName) {
 		  
 	  assert(simulationTime>=0);
@@ -23,7 +22,7 @@ Time Simulation::getCurrentTime() const {
 }
 
 bool Simulation::isInInterval(Time toTest, Milliseconds min, Milliseconds max) {
-	double test(toTest*constants::SIM_STEP);
+	double test(toTest*constants::H);
 	return (!(test < min) and test < max);
 }
 
@@ -49,49 +48,14 @@ void Simulation::simulateANeuron(const double& extI, const Milliseconds& extIBeg
 		} else {
 			currentImput = 0.0;
 		}
-		neuron.update(currentImput, currentTime_+constants::H);
+		neuron.update(currentImput, currentTime_+1);
 
 		storeInFile(neuron.getMbPotential(), file);
-		currentTime_ += constants::H;
+		++currentTime_;
 	}
 	file.close();
 }
 
-
-void Simulation::simulateTwoNeurons(const double& extI, const Time& extIBeginning, const Time& extIEnd) {
-	std::vector<Neuron*> neurons;
-	initNeurons(neurons, 2);
-	
-	double currentImput(0.0);
-	
-	std::ofstream file;
-	file.open(storingFile_);
-	
-	while (currentTime_ <= simulationTime_) {
-		if (isInInterval(currentTime_, extIBeginning, extIEnd)) {
-			currentImput = extI;
-		} else {
-			currentImput = 0.0;
-		}
-		for (auto& neur:neurons) {
-			if (neur->update(currentImput, currentTime_+constants::H)) {
-				for (auto& neuron:neurons) {
-					if (neuron != neur) {
-						neuron->receiveSpike(constants::J);
-					}
-				}
-			}
-		}
-		storeInFile(neurons, file);
-		currentTime_ += constants::H;
-	}
-	file.close();
-	for(auto& neur:neurons) {
-		delete neur;
-		neur = nullptr;
-	}
-	neurons.clear();
-}
 
 //~ void Simulation::simulateTwoNeurons(const double& extI, const Time& extIBeginning, const Time& extIEnd) {
 	//~ std::vector<Neuron*> neurons;
@@ -108,9 +72,8 @@ void Simulation::simulateTwoNeurons(const double& extI, const Time& extIBeginnin
 		//~ } else {
 			//~ currentImput = 0.0;
 		//~ }
-		
 		//~ for (auto& neur:neurons) {
-			//~ if (neur->update(currentImput, currentTime_+constants::H)) {
+			//~ if (neur->update(currentImput, currentTime_+1)) {
 				//~ for (auto& neuron:neurons) {
 					//~ if (neuron != neur) {
 						//~ neuron->receiveSpike(constants::J);
@@ -119,7 +82,7 @@ void Simulation::simulateTwoNeurons(const double& extI, const Time& extIBeginnin
 			//~ }
 		//~ }
 		//~ storeInFile(neurons, file);
-		//~ currentTime_ += constants::H;
+		//~ ++currentTime_;
 	//~ }
 	//~ file.close();
 	//~ for(auto& neur:neurons) {
@@ -128,6 +91,39 @@ void Simulation::simulateTwoNeurons(const double& extI, const Time& extIBeginnin
 	//~ }
 	//~ neurons.clear();
 //~ }
+
+void Simulation::simulateTwoNeurons(const double& extI, const Time& extIBeginning, const Time& extIEnd) {
+	Neuron n1;
+	Neuron n2;
+	
+	double currentImput(0.0);
+	
+	std::ofstream file;
+	file.open(storingFile_);
+
+	
+	while (currentTime_ <= simulationTime_) {
+		if (isInInterval(currentTime_, extIBeginning, extIEnd)) {
+			currentImput = extI;
+		} else {
+			currentImput = 0.0;
+		}
+		
+		bool spike;
+		spike = n1.update(currentImput, currentTime_+1);
+		
+		if (spike) {
+			n2.receiveSpike(constants::J);
+		}
+		n2.update(0.0, currentTime_+1);
+		
+		file << currentTime_*constants::H << '\t' << n1.getMbPotential() << '\t' << n2.getMbPotential() << std::endl;
+		
+		++currentTime_;
+	}
+	
+	file.close();
+}
 
 
 
