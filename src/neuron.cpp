@@ -7,7 +7,6 @@ Neuron::Neuron()
 	  nbSpikes(0),
 	  lastSpike(0),
 	  currentTime(0) {
-	  //~ timeInBuffer(0) {
 		  for (auto& J:buffer) {
 			  J=0.0;
 		  }

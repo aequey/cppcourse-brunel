@@ -103,6 +103,7 @@ void Simulation::simulateTwoNeurons(const double& extI, const Milliseconds& extI
 
 	
 	while (currentTime_ <= simulationTime_) {
+		file << currentTime_*constants::H << '\t' << n1.getMbPotential() << '\t' << n2.getMbPotential() << std::endl;
 		if (isInInterval(currentTime_, extIBeginning, extIEnd)) {
 			currentImput = extI;
 		} else {
@@ -117,9 +118,8 @@ void Simulation::simulateTwoNeurons(const double& extI, const Milliseconds& extI
 		}
 		n2.update(0.0, currentTime_+1);
 		
-		file << currentTime_*constants::H << '\t' << n1.getMbPotential() << '\t' << n2.getMbPotential() << std::endl;
-		
 		++currentTime_;
+
 	}
 	
 	file.close();
