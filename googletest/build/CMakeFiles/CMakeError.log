@@ -1,0 +1,35 @@
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/antoineequey/myfiles/cpp/Neuron_project_part2/googletest/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_01ffa/fast"
+/usr/bin/make -f CMakeFiles/cmTC_01ffa.dir/build.make CMakeFiles/cmTC_01ffa.dir/build
+make[1] : on entre dans le répertoire « /home/antoineequey/myfiles/cpp/Neuron_project_part2/googletest/build/CMakeFiles/CMakeTmp »
+Building C object CMakeFiles/cmTC_01ffa.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_01ffa.dir/CheckSymbolExists.c.o   -c /home/antoineequey/myfiles/cpp/Neuron_project_part2/googletest/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_01ffa
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_01ffa.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_01ffa.dir/CheckSymbolExists.c.o  -o cmTC_01ffa -rdynamic 
+CMakeFiles/cmTC_01ffa.dir/CheckSymbolExists.c.o : Dans la fonction « main » :
+CheckSymbolExists.c:(.text+0x16) : référence indéfinie vers « pthread_create »
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_01ffa.dir/build.make:97 : la recette pour la cible « cmTC_01ffa » a échouée
+make[1]: *** [cmTC_01ffa] Erreur 1
+make[1] : on quitte le répertoire « /home/antoineequey/myfiles/cpp/Neuron_project_part2/googletest/build/CMakeFiles/CMakeTmp »
+Makefile:126 : la recette pour la cible « cmTC_01ffa/fast » a échouée
+make: *** [cmTC_01ffa/fast] Erreur 2
+
+File /home/antoineequey/myfiles/cpp/Neuron_project_part2/googletest/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
