@@ -4,7 +4,7 @@
 
 int main() {
 	
-	const double extI(1.01);
+	const double extI(0.0);
 	const Milliseconds extIBeginning(0.0);
 	const Milliseconds extIEnd(400.0);
 	

@@ -5,6 +5,7 @@
 #include <vector>
 #include <cmath>
 #include <cassert>
+#include <iostream>
 
 Simulation::Simulation()
 	: Simulation(totalStep, "../res/potentials.txt") {}
@@ -43,6 +44,7 @@ void Simulation::simulateANeuron(const double& extI, const Milliseconds& extIBeg
 	std::ofstream file;
 	file.open(storingFile_);
 	while (currentTime_ <= simulationTime_) {
+		file << currentTime_*constants::H << '\t' << neuron.getMbPotential() << std::endl;
 		if (isInInterval(currentTime_, extIBeginning, extIEnd)) {
 			currentImput = extI;
 		} else {
@@ -50,7 +52,6 @@ void Simulation::simulateANeuron(const double& extI, const Milliseconds& extIBeg
 		}
 		neuron.update(currentImput, currentTime_+1);
 
-		storeInFile(neuron.getMbPotential(), file);
 		++currentTime_;
 	}
 	file.close();
@@ -114,7 +115,7 @@ void Simulation::simulateTwoNeurons(const double& extI, const Milliseconds& extI
 		spike = n1.update(currentImput, currentTime_+1);
 		
 		if (spike) {
-			n2.receiveSpike(constants::J, constants::D_IN_STEP);
+			n2.receiveSpike(constants::JE, constants::D_IN_STEP);
 		}
 		n2.update(0.0, currentTime_+1);
 		

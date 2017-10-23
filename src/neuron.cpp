@@ -1,3 +1,4 @@
+#include <random>
 #include "neuron.h"
 #include "constants.h"
 #include "simulation.h"
@@ -35,7 +36,7 @@ bool Neuron::isRefractory() {
 }
 
 bool Neuron::update(const double& extI, const Time& stopTime) {
-	double J(buffer[inBuffer(currentTime)]);
+	Potential J(buffer[inBuffer(currentTime)]);
 	bool spiked(false);
 	while (currentTime<stopTime) {
 		if (mbPotential>constants::SPIKE_THRESHOLD) {
@@ -54,11 +55,14 @@ bool Neuron::update(const double& extI, const Time& stopTime) {
 	return spiked;
 }
 
-void Neuron::updatePotential(const double& extI, const double& J) {
-	mbPotential = ODEFactor1*mbPotential + extI*ODEFactor2 + J;
+void Neuron::updatePotential(const double& extI, const Potential& J) {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::poisson_distribution<int> d(constants::CE*constants::H*0.02);
+	mbPotential = ODEFactor1*mbPotential + extI*ODEFactor2 + J + d(gen)*0.1;
 }
 
-void Neuron::receiveSpike(const double& amplitude, const Time& delay) {
+void Neuron::receiveSpike(const Potential& amplitude, const Time& delay) {
 	buffer[inBuffer(currentTime+delay)]+=amplitude;
 }
 

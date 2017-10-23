@@ -15,7 +15,12 @@ Network::~Network() {
 	}
 }
 
-void Network::addNeuron(Neuron* neuron, std::vector<Neuron*> connexions) {
-	std::pair<Neuron*, std::vector<Neuron*>> connexion(neuron, connexions);
+//~ void Network::addNeuron(Neuron* neuron, std::vector<Neuron*> connexions) {
+	//~ std::pair<Neuron*, std::vector<Neuron*>> connexion(neuron, connexions);
+	//~ network_.insert(connexion);
+//~ }
+
+void Network::addNeuron(Neuron* neuron, std::array<Neuron*, (constants::CE + constants::CI)> connexions) {
+	std::pair<Neuron*, std::array<Neuron*, (constants::CE + constants::CI)>> connexion(neuron, connexions);
 	network_.insert(connexion);
 }
