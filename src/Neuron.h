@@ -1,8 +1,8 @@
 #ifndef NEURON_H
 #define NEURON_H
 
-#include "constants.h"
-#include "simulation.h"
+#include "Constants.h"
+#include "Simulation.h"
 #include <array>
 
 class Simulation;
@@ -16,10 +16,13 @@ public :
 	bool update(const Time& stopTime);
 	bool update(const double& extI, const Time& stopTime, const double& noise);
 	void receiveSpike(const Potential& amplitude, const Time & delay);
+	virtual void receiveSpike(const Neuron* neur, const Time& delay);
+	virtual Potential getJToExcitatory() const;
 	
 	Potential getMbPotential() const;
 	unsigned int getNbSpikes() const;
 	Time getSpikeTime() const;
+	virtual Potential getJ() const;
 private :
 	Potential mbPotential;
 	unsigned int nbSpikes;

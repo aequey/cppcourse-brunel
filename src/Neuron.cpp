@@ -1,7 +1,7 @@
 #include <random>
-#include "neuron.h"
-#include "constants.h"
-#include "simulation.h"
+#include "Neuron.h"
+#include "Constants.h"
+#include "Simulation.h"
 
 Neuron::Neuron()
 	: mbPotential(constants::RESET_POTENTIAL),
@@ -26,6 +26,9 @@ Time Neuron::getSpikeTime() const {
 	return lastSpike;
 }
 
+Potential Neuron::getJ() const {
+	return constants::JE;
+}
 
 bool Neuron::isRefractory() {
 	if (nbSpikes>0) {
@@ -67,14 +70,19 @@ bool Neuron::update(const Time& stopTime) {
 }	
 
 void Neuron::updatePotential(const double& extI, const Potential& J, const double& noise) {
-	//~ std::random_device rd;
-	//~ std::mt19937 gen(rd());
-	//~ std::poisson_distribution<int> d(constants::CE*constants::H*0.02);
-	mbPotential = ODEFactor1*mbPotential + extI*ODEFactor2 + J + noise/*d(gen)*0.1*/;
+	mbPotential = ODEFactor1*mbPotential + extI*ODEFactor2 + J + noise;
 }
 
 void Neuron::receiveSpike(const Potential& amplitude, const Time& delay) {
 	buffer[inBuffer(currentTime+delay)]+=amplitude;
+}
+
+void Neuron::receiveSpike(const Neuron* neur, const Time& delay) {
+	receiveSpike(neur->getJ(), delay);
+}
+
+Potential Neuron::getJToExcitatory() const {
+	return getJ();
 }
 
 unsigned int Neuron::inBuffer(const Time& time) const {

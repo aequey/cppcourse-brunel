@@ -3,8 +3,8 @@
 
 #include <string>
 #include <vector>
-#include "constants.h"
-#include "neuron.h"
+#include "Constants.h"
+#include "Neuron.h"
 
 class Neuron;
 

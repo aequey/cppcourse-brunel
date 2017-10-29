@@ -1,7 +1,9 @@
-#include "simulation.h"
-#include "constants.h"
-#include "neuron.h"
-#include "network.h"
+#include "Simulation.h"
+#include "Constants.h"
+//~ #include "Neuron.h"
+#include "ExcitatoryNeuron.h"
+#include "InhibitoryNeuron.h"
+#include "Network.h"
 #include <fstream>
 #include <vector>
 #include <cmath>
@@ -58,42 +60,6 @@ void Simulation::simulateANeuron(const double& extI, const Milliseconds& extIBeg
 	file.close();
 }
 
-
-//~ void Simulation::simulateTwoNeurons(const double& extI, const Time& extIBeginning, const Time& extIEnd) {
-	//~ std::vector<Neuron*> neurons;
-	//~ initNeurons(neurons, 2);
-	
-	//~ double currentImput(0.0);
-	
-	//~ std::ofstream file;
-	//~ file.open(storingFile_);
-	
-	//~ while (currentTime_ <= simulationTime_) {
-		//~ if (isInInterval(currentTime_, extIBeginning, extIEnd)) {
-			//~ currentImput = extI;
-		//~ } else {
-			//~ currentImput = 0.0;
-		//~ }
-		//~ for (auto& neur:neurons) {
-			//~ if (neur->update(currentImput, currentTime_+1)) {
-				//~ for (auto& neuron:neurons) {
-					//~ if (neuron != neur) {
-						//~ neuron->receiveSpike(constants::J);
-					//~ }
-				//~ }
-			//~ }
-		//~ }
-		//~ storeInFile(neurons, file);
-		//~ ++currentTime_;
-	//~ }
-	//~ file.close();
-	//~ for(auto& neur:neurons) {
-		//~ delete neur;
-		//~ neur = nullptr;
-	//~ }
-	//~ neurons.clear();
-//~ }
-
 void Simulation::simulateTwoNeurons(const double& extI, const Milliseconds& extIBeginning, const Milliseconds& extIEnd) {
 	Neuron n1;
 	Neuron n2;
@@ -116,7 +82,7 @@ void Simulation::simulateTwoNeurons(const double& extI, const Milliseconds& extI
 		spike = n1.update(currentImput, currentTime_+1);
 		
 		if (spike) {
-			n2.receiveSpike(constants::JE, constants::D_IN_STEP);
+			n2.receiveSpike(n1.getJ(), constants::D_IN_STEP);
 		}
 		n2.update(0.0, currentTime_+1);
 		
@@ -133,28 +99,30 @@ void Simulation::simulateNetwork() {
 	std::vector<Neuron*> neur;
 	
 	for (unsigned int i(0); i<constants::NE; ++i) {
-		neur.push_back(new Neuron);
+		neur.push_back(new ExcitatoryNeuron);
 	}
 	
 	for (unsigned int i(0); i<constants::NI; ++i) {
-		neur.push_back(new Neuron);
+		neur.push_back(new InhibitoryNeuron);
 	}
 	
-	std::cout /*<< neur.size() */<< "Generating connexions..." << std::endl;
+	std::cout << "Generating connexions..." << std::endl;
 	net.generateConnexions(neur);
 	std::cout << "Connexions generated" << std::endl;
+	std::cout << "Generating senders..." << std::endl;
 	net.generateSenders(neur);
+	std::cout << "Senders generated" << std::endl;	
 	
 	std::ofstream file;
 	file.open(storingFile_);
 
-	
+	std::cout << "Starting simulation..." << std::endl;
 	while (currentTime_ <= simulationTime_) {
 		file << currentTime_*constants::H;
 		for (const auto& n:neur) {
 			file  << '\t' << n->getMbPotential();
 		}
-		file << std::endl;
+		file << std::endl << std::endl;
 		
 		bool spike;
 		for (auto& n:neur) {

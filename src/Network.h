@@ -3,9 +3,10 @@
 
 #include <unordered_map>
 #include <vector>
-//~ #include <array>
-#include "neuron.h"
-#include "constants.h"
+#include <array>
+#include <fstream>
+#include "Neuron.h"
+#include "Constants.h"
 
 class Network {
 public :
@@ -16,6 +17,9 @@ public :
 	void addNeuron(Neuron*, std::vector<Neuron*>);
 	void addNeuron(Neuron*, std::array<Neuron*, (constants::CE + constants::CI)>);
 	void sendSpike(Neuron*& neur) const;
+	
+	//~ void printConnexions(std::ofstream& file);
+
 private :
 	std::unordered_map<Neuron*, std::vector<Neuron*>> toSend;
 	std::unordered_map<Neuron*, std::array<Neuron*, (constants::CE + constants::CI)>> network;

@@ -1,6 +1,6 @@
 #include <iostream>
-#include "../src/neuron.h"
-#include "../src/simulation.h"
+#include "../src/Neuron.h"
+#include "../src/Simulation.h"
 #include "../googletest/include/gtest/gtest.h"
 
 TEST (singleNeuron, noSpike) {
