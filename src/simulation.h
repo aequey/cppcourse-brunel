@@ -17,7 +17,8 @@ public :
 
 	void simulateANeuron(const double& extI, const Milliseconds& extIBeginning, const Milliseconds& extIEnd);
 	void simulateTwoNeurons(const double& extI, const Milliseconds& extIBeginning, const Milliseconds& extIEnd);
-
+	void simulateNetwork();
+	
 private :	
 	Time currentTime_;
 	const Time simulationTime_;

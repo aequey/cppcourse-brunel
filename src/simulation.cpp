@@ -1,6 +1,7 @@
 #include "simulation.h"
 #include "constants.h"
 #include "neuron.h"
+#include "network.h"
 #include <fstream>
 #include <vector>
 #include <cmath>
@@ -126,6 +127,51 @@ void Simulation::simulateTwoNeurons(const double& extI, const Milliseconds& extI
 	file.close();
 }
 
+void Simulation::simulateNetwork() {
+	Network net;
+	
+	std::vector<Neuron*> neur;
+	
+	for (unsigned int i(0); i<constants::NE; ++i) {
+		neur.push_back(new Neuron);
+	}
+	
+	for (unsigned int i(0); i<constants::NI; ++i) {
+		neur.push_back(new Neuron);
+	}
+	
+	std::cout /*<< neur.size() */<< "Generating connexions..." << std::endl;
+	net.generateConnexions(neur);
+	std::cout << "Connexions generated" << std::endl;
+	net.generateSenders(neur);
+	
+	std::ofstream file;
+	file.open(storingFile_);
+
+	
+	while (currentTime_ <= simulationTime_) {
+		file << currentTime_*constants::H;
+		for (const auto& n:neur) {
+			file  << '\t' << n->getMbPotential();
+		}
+		file << std::endl;
+		
+		bool spike;
+		for (auto& n:neur) {
+
+			spike = n->update(currentTime_+1);
+		
+			if (spike) {
+				net.sendSpike(n);
+			}
+		}
+		std::cout << currentTime_*0.1 << " ms" << std::endl;
+		++currentTime_;
+
+	}
+	
+	file.close();
+}
 
 
 void Simulation::initNeurons(std::vector<Neuron*>& neurons, size_t nb) {

@@ -35,7 +35,7 @@ bool Neuron::isRefractory() {
 	}
 }
 
-bool Neuron::update(const double& extI, const Time& stopTime) {
+bool Neuron::update(const double& extI, const Time& stopTime, const double& noise) {
 	Potential J(buffer[inBuffer(currentTime)]);
 	bool spiked(false);
 	while (currentTime<stopTime) {
@@ -47,7 +47,7 @@ bool Neuron::update(const double& extI, const Time& stopTime) {
 		if (isRefractory()) {
 			mbPotential=0.0;
 		} else {
-			updatePotential(extI, J);
+			updatePotential(extI, J, noise);
 		}
 		buffer[inBuffer(currentTime)]=0.0;
 		++currentTime;
@@ -55,11 +55,22 @@ bool Neuron::update(const double& extI, const Time& stopTime) {
 	return spiked;
 }
 
-void Neuron::updatePotential(const double& extI, const Potential& J) {
+bool Neuron::update(const double& extI, const Time& stopTime) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::poisson_distribution<int> d(constants::CE*constants::H*0.02);
-	mbPotential = ODEFactor1*mbPotential + extI*ODEFactor2 + J + d(gen)*0.1;
+	std::poisson_distribution<int> d(2.0*constants::SPIKE_THRESHOLD/constants::TAU);
+	return update(extI, stopTime, d(gen)*constants::H);
+}
+
+bool Neuron::update(const Time& stopTime) {
+	return update(0.0, stopTime);
+}	
+
+void Neuron::updatePotential(const double& extI, const Potential& J, const double& noise) {
+	//~ std::random_device rd;
+	//~ std::mt19937 gen(rd());
+	//~ std::poisson_distribution<int> d(constants::CE*constants::H*0.02);
+	mbPotential = ODEFactor1*mbPotential + extI*ODEFactor2 + J + noise/*d(gen)*0.1*/;
 }
 
 void Neuron::receiveSpike(const Potential& amplitude, const Time& delay) {
