@@ -59,9 +59,9 @@ bool Neuron::update(const double& extI, const Time& stopTime, const double& nois
 }
 
 bool Neuron::update(const double& extI, const Time& stopTime) {
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::poisson_distribution<int> d(2.0*constants::SPIKE_THRESHOLD/constants::TAU);
+	static std::random_device rd;
+	static std::mt19937 gen(rd());
+	static std::poisson_distribution<int> d(2.0*constants::SPIKE_THRESHOLD/constants::TAU);
 	return update(extI, stopTime, d(gen)*constants::H);
 }
 

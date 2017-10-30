@@ -7,10 +7,10 @@ Potential ExcitatoryNeuron::getJ() const {
 }
 
 void ExcitatoryNeuron::receiveSpike(const Neuron* neur, const Time& delay) {
-	Potential amplitude(neur->getJToExcitatory());
+	Potential amplitude(neur->getJ/*ToExcitatory*/());
 	Neuron::receiveSpike(amplitude, delay);
 }
 
-Potential ExcitatoryNeuron::getJToExcitatory() const {
-	return getJ();
-}
+//~ Potential ExcitatoryNeuron::getJToExcitatory() const {
+	//~ return getJ();
+//~ }
