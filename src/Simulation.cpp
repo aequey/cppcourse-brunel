@@ -118,19 +118,20 @@ void Simulation::simulateNetwork() {
 
 	std::cout << "Starting simulation..." << std::endl;
 	while (currentTime_ <= simulationTime_) {
-		file << currentTime_*constants::H;
-		for (const auto& n:neur) {
-			file  << '\t' << n->getMbPotential();
-		}
-		file << std::endl << std::endl;
+		//~ for (const auto& n:neur) {
+			//~ file  << '\t' << n->getMbPotential();
+		//~ }
 		
 		bool spike;
-		for (auto& n:neur) {
-
-			spike = n->update(currentTime_+1);
+		//~ for (auto& n:neur) {
+		for (size_t i(0); i<neur.size();++i) {
+			spike = neur[i]->update(currentTime_+1);
 		
 			if (spike) {
-				net.sendSpike(n);
+				net.sendSpike(neur[i]);
+					file << currentTime_*constants::H << '\t' << i;
+					file << '\n';
+
 			}
 		}
 		std::cout << currentTime_*0.1 << " ms" << std::endl;

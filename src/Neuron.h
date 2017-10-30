@@ -17,7 +17,7 @@ public :
 	bool update(const double& extI, const Time& stopTime, const double& noise);
 	void receiveSpike(const Potential& amplitude, const Time & delay);
 	virtual void receiveSpike(const Neuron* neur, const Time& delay);
-	virtual Potential getJToExcitatory() const;
+	//~ virtual Potential getJToExcitatory() const;
 	
 	Potential getMbPotential() const;
 	unsigned int getNbSpikes() const;
@@ -36,7 +36,7 @@ private :
 	static constexpr double ODEFactor2 = (mbResistance*(1-ODEFactor1));
 
 	bool isRefractory();
-	void updatePotential(const double& extI, const Potential& J, const double& noise);
+	void updatePotential(const double& extI, const Potential& J);
 	unsigned int inBuffer(const Time&) const;
 };
 
