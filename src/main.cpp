@@ -9,7 +9,6 @@ int main() {
 	const Milliseconds extIBeginning(0.0);
 	const Milliseconds extIEnd(400.0);
 	*/
-	
 	Simulation sim(100.0, "../res/data.dat");
 	//~ sim.simulateTwoNeurons(extI, extIBeginning, extIEnd);
 	sim.simulateNetwork();
