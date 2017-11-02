@@ -15,7 +15,7 @@ namespace constants {
 	const Potential SPIKE_THRESHOLD(20.0); // [mV]
 	const Potential RESET_POTENTIAL(0.0); // [mV] Can use 10.0 as well (10.0 is given in the paper)
 	const Potential JE(0.1); // [mV] Amplitude of the spike
-	const double G(3.0);
+	const double G(5.0);
 	const double ETA(2.0);
 	const Potential JI(JE*G);
 	const Milliseconds D(1.5); // [ms] Delay of the spike
@@ -28,7 +28,7 @@ namespace constants {
 	const double CONNEXION_RATE(0.1);
 	const unsigned int CE(NE*CONNEXION_RATE);
 	const unsigned int CI(NI*CONNEXION_RATE);
-	const double DISTRIBUTION(constants::ETA*constants::SPIKE_THRESHOLD/(constants::TAU*constants::JE));
+	const double DISTRIBUTION(constants::ETA*constants::SPIKE_THRESHOLD/(constants::TAU*constants::JE)*constants::H);
 	
 }
 

@@ -84,6 +84,7 @@ bool Neuron::update(const Time& stopTime) {
 }	
 
 void Neuron::updatePotential(const double& extI, const Potential& J) {
+	//~ std::cout << J << ' ';
 	mbPotential = ODEFactor1*mbPotential + extI*ODEFactor2 + J;
 }
 

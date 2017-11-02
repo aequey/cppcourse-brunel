@@ -82,7 +82,7 @@ TEST (singleNeuron, spikeTimes) {
 	EXPECT_EQ(n.getMbPotential(), 0.0);
 }
 
-
+//~ TEST (twoNeurons, spikeDelay)
 
 
 

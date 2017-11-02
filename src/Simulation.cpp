@@ -128,7 +128,7 @@ void Simulation::simulateNetwork() {
 		
 			if (spike) {
 				net.sendSpike(neur[i]);
-					file << currentTime_*constants::H << '\t' << i;
+					file << currentTime_ << '\t' << i;
 					file << '\n';
 
 			}
