@@ -2,6 +2,7 @@
 #include "Neuron.h"
 #include "Constants.h"
 #include "Simulation.h"
+#include <iostream>
 
 Neuron::Neuron(bool excitatory)
 	: mbPotential(constants::RESET_POTENTIAL),
@@ -12,6 +13,7 @@ Neuron::Neuron(bool excitatory)
 		  for (auto& J:buffer) {
 			  J=0.0;
 		  }
+		  //~ std::cout << refractoryStep << ' '  << mbResistance << ' ' << ODEFactor1  << ' ' << ODEFactor2 << std::endl;
 	  }
 
 Neuron::Neuron()
@@ -30,11 +32,15 @@ Time Neuron::getSpikeTime() const {
 	return lastSpike;
 }
 
+Time Neuron::getCurrentTime() const {
+	return currentTime;
+}
+
 Potential Neuron::getJ() const {
 	if (excitatory) {
 		return constants::JE;
 	} else {
-		return constants::JI;
+		return -(constants::JI);
 	}
 }
 
@@ -47,16 +53,16 @@ bool Neuron::isRefractory() {
 }
 
 bool Neuron::update(const double& extI, const Time& stopTime, const double& noise) {
-	Potential J(buffer[inBuffer(currentTime)]+noise);
 	bool spiked(false);
 	while (currentTime<stopTime) {
+		Potential J(buffer[inBuffer(currentTime)]+noise);
 		if (mbPotential>constants::SPIKE_THRESHOLD) {
 			lastSpike = currentTime;
 			++nbSpikes;
 			spiked = true;
 		}
 		if (isRefractory()) {
-			mbPotential=0.0;
+			mbPotential=constants::RESET_POTENTIAL;
 		} else {
 			updatePotential(extI, J);
 		}
@@ -70,7 +76,7 @@ bool Neuron::update(const double& extI, const Time& stopTime) {
 	static std::random_device rd;
 	static std::mt19937 gen(rd());
 	static std::poisson_distribution<int> d(constants::DISTRIBUTION);
-	return update(extI, stopTime, d(gen)*constants::JE);
+	return update(extI, stopTime, d(gen)*constants::JE); // Pas sûr
 }
 
 bool Neuron::update(const Time& stopTime) {
@@ -81,17 +87,13 @@ void Neuron::updatePotential(const double& extI, const Potential& J) {
 	mbPotential = ODEFactor1*mbPotential + extI*ODEFactor2 + J;
 }
 
-void Neuron::receiveSpike(const Potential& amplitude, const Time& delay) {
-	buffer[inBuffer(currentTime+delay)]+=amplitude;
+void Neuron::receiveSpike(const Potential& amplitude, const Time& receptionTime) {
+	buffer[inBuffer(receptionTime)]+=amplitude;
 }
 
-void Neuron::receiveSpike(const Neuron* neur, const Time& delay) {
-	receiveSpike(neur->getJ(), delay);
+void Neuron::receiveSpike(const Neuron* neur, const Time& receptionTime) {
+	receiveSpike(neur->getJ(), receptionTime);
 }
-
-//~ Potential Neuron::getJToExcitatory() const {
-	//~ return getJ();
-//~ }
 
 unsigned int Neuron::inBuffer(const Time& time) const {
 	return time % (buffer.size());

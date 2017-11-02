@@ -16,12 +16,12 @@ public :
 	bool update(const double& extI, const Time& stopTime);
 	bool update(const Time& stopTime);
 	bool update(const double& extI, const Time& stopTime, const double& noise);
-	void receiveSpike(const Potential& amplitude, const Time & delay);
-	void receiveSpike(const Neuron* neur, const Time& delay);
-	//~ virtual Potential getJToExcitatory() const;
+	void receiveSpike(const Potential& amplitude, const Time & receptionTime);
+	void receiveSpike(const Neuron* neur, const Time& receptionTime);
 	
 	Potential getMbPotential() const;
 	unsigned int getNbSpikes() const;
+	Time getCurrentTime() const;
 	Time getSpikeTime() const;
 	Potential getJ() const;
 private :

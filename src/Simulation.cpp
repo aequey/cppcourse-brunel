@@ -1,8 +1,6 @@
 #include "Simulation.h"
 #include "Constants.h"
 #include "Neuron.h"
-//~ #include "ExcitatoryNeuron.h"
-//~ #include "InhibitoryNeuron.h"
 #include "Network.h"
 #include <fstream>
 #include <vector>
@@ -105,6 +103,7 @@ void Simulation::simulateNetwork() {
 	for (unsigned int i(0); i<constants::NI; ++i) {
 		neur.push_back(new Neuron(false));
 	}
+	assert(neur.size()==constants::NE+constants::NI);
 	
 	std::cout << "Generating connexions..." << std::endl;
 	net.generateConnexions(neur);
@@ -140,14 +139,4 @@ void Simulation::simulateNetwork() {
 	}
 	
 	file.close();
-}
-
-
-void Simulation::initNeurons(std::vector<Neuron*>& neurons, size_t nb) {
-	assert(neurons.size()==0);
-	for(size_t i(0); i<nb; ++i) {
-		neurons.push_back(new Neuron);
-		assert(neurons[i]->getMbPotential()==constants::RESET_POTENTIAL);
-	}
-	assert(neurons.size()==nb);
 }

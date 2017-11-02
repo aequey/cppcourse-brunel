@@ -48,6 +48,7 @@ void Network::generateConnexions(const std::vector<Neuron*>& neurons) {
 	std::array<Neuron*, (constants::CE + constants::CI)> connexions;
 
 	for (auto& n:neurons) {
+		connexions.fill(nullptr);
 		for (size_t i(0); i<constants::CE; ++i) {
 			connexions[i] = neurons[distribE(gen)];
 		}
@@ -61,21 +62,27 @@ void Network::generateConnexions(const std::vector<Neuron*>& neurons) {
 void Network::generateSenders(const std::vector<Neuron*>& neurons) {
 	std::vector<Neuron*> send;
 	for (auto& n:neurons) {
+		send.clear();
+		assert(send.size()==0);
 		addNeuron(n, send);
-		for(auto& c:network[n]) {
-			toSend[c].push_back(n);
-		}
+		//~ for(auto& c:network[n]) {
+			//~ toSend[c].push_back(n);
+		//~ }
 	}
 	
-	//~ for (auto& n:neurons) {
-		//~ }
+	for (auto& n:neurons) {
+			for(auto& c:network[n]) {
+			toSend[c].push_back(n);
+		}
+
+		}
 	//~ }
 }
 
 
 void Network::sendSpike(Neuron*& neur) const {
-	for(auto& n:toSend.at(neur)) {
-		n->receiveSpike(neur->getJ(), constants::D_IN_STEP);
+	for(auto& n:(toSend.at(neur))) {
+		n->receiveSpike(neur->getJ(), neur->getCurrentTime()+constants::D_IN_STEP);
 	}
 }
 

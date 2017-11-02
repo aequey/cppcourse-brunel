@@ -29,7 +29,6 @@ private :
 	bool isInInterval(Time toTest, Milliseconds min, Milliseconds max);
 	void storeInFile(double toStore, std::ofstream& out);
 	void storeInFile(const std::vector<Neuron*>& neurons, std::ofstream& out);
-	void initNeurons(std::vector<Neuron*>& neurons, size_t nb);
 
 };
 
