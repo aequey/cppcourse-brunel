@@ -3,15 +3,19 @@
 #include "Constants.h"
 #include "Simulation.h"
 
-Neuron::Neuron()
+Neuron::Neuron(bool excitatory)
 	: mbPotential(constants::RESET_POTENTIAL),
 	  nbSpikes(0),
 	  lastSpike(0),
-	  currentTime(0) {
+	  currentTime(0),
+	  excitatory(excitatory) {
 		  for (auto& J:buffer) {
 			  J=0.0;
 		  }
 	  }
+
+Neuron::Neuron()
+	: Neuron(true) {}
 
 double Neuron::getMbPotential() const {
 	return mbPotential;
@@ -27,7 +31,11 @@ Time Neuron::getSpikeTime() const {
 }
 
 Potential Neuron::getJ() const {
-	return constants::JE;
+	if (excitatory) {
+		return constants::JE;
+	} else {
+		return constants::JI;
+	}
 }
 
 bool Neuron::isRefractory() {
@@ -61,7 +69,7 @@ bool Neuron::update(const double& extI, const Time& stopTime, const double& nois
 bool Neuron::update(const double& extI, const Time& stopTime) {
 	static std::random_device rd;
 	static std::mt19937 gen(rd());
-	static std::poisson_distribution<int> d(constants::ETA*constants::SPIKE_THRESHOLD/(constants::TAU*constants::JE));
+	static std::poisson_distribution<int> d(constants::DISTRIBUTION);
 	return update(extI, stopTime, d(gen)*constants::JE);
 }
 

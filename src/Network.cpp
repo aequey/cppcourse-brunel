@@ -4,6 +4,7 @@
 #include <random>
 #include <iostream>
 #include <fstream>
+#include <cassert>
 
 Network::Network() {
 	network.clear();
@@ -26,12 +27,12 @@ Network::~Network() {
 
 }
 
-void Network::addNeuron(Neuron* neuron, std::array<Neuron*, (constants::CE + constants::CI)> connexions) {
+void Network::addNeuron(Neuron* neuron, const std::array<Neuron*, (constants::CE + constants::CI)>& connexions) {
 	std::pair<Neuron*, std::array<Neuron*, (constants::CE + constants::CI)>> connexion(neuron, connexions);
 	network.insert(connexion);
 }
 
-void Network::addNeuron(Neuron* neuron, std::vector<Neuron*> connexions) {
+void Network::addNeuron(Neuron* neuron, const std::vector<Neuron*>& connexions) {
 	std::pair<Neuron*, std::vector<Neuron*>> connexion(neuron, connexions);
 	toSend.insert(connexion);
 }
@@ -57,17 +58,18 @@ void Network::generateConnexions(const std::vector<Neuron*>& neurons) {
 	}
 }
 
-void Network::generateSenders(std::vector<Neuron*> neurons) {
+void Network::generateSenders(const std::vector<Neuron*>& neurons) {
+	std::vector<Neuron*> send;
 	for (auto& n:neurons) {
-		std::vector<Neuron*> send;
 		addNeuron(n, send);
-	}
-	
-	for (auto& n:neurons) {
 		for(auto& c:network[n]) {
 			toSend[c].push_back(n);
 		}
 	}
+	
+	//~ for (auto& n:neurons) {
+		//~ }
+	//~ }
 }
 
 

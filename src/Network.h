@@ -13,9 +13,9 @@ public :
 	Network();
 	~Network();
 	void generateConnexions(const std::vector<Neuron*>& neurons);
-	void generateSenders(std::vector<Neuron*> neurons);
-	void addNeuron(Neuron*, std::vector<Neuron*>);
-	void addNeuron(Neuron*, std::array<Neuron*, (constants::CE + constants::CI)>);
+	void generateSenders(const std::vector<Neuron*>& neurons);
+	void addNeuron(Neuron*, const std::vector<Neuron*>&);
+	void addNeuron(Neuron*, const std::array<Neuron*, (constants::CE + constants::CI)>&);
 	void sendSpike(Neuron*& neur) const;
 	
 	//~ void printConnexions(std::ofstream& file);

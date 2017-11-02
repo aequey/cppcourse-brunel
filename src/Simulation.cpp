@@ -1,8 +1,8 @@
 #include "Simulation.h"
 #include "Constants.h"
-//~ #include "Neuron.h"
-#include "ExcitatoryNeuron.h"
-#include "InhibitoryNeuron.h"
+#include "Neuron.h"
+//~ #include "ExcitatoryNeuron.h"
+//~ #include "InhibitoryNeuron.h"
 #include "Network.h"
 #include <fstream>
 #include <vector>
@@ -97,13 +97,13 @@ void Simulation::simulateNetwork() {
 	Network net;
 	
 	std::vector<Neuron*> neur;
-	
+	assert(neur.size()==0);
 	for (unsigned int i(0); i<constants::NE; ++i) {
-		neur.push_back(new ExcitatoryNeuron);
+		neur.push_back(new Neuron(true));
 	}
 	
 	for (unsigned int i(0); i<constants::NI; ++i) {
-		neur.push_back(new InhibitoryNeuron);
+		neur.push_back(new Neuron(false));
 	}
 	
 	std::cout << "Generating connexions..." << std::endl;
