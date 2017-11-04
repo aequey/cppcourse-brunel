@@ -2,7 +2,6 @@
 #include "Neuron.h"
 #include <vector>
 #include <random>
-#include <iostream>
 #include <fstream>
 #include <cassert>
 
@@ -28,6 +27,7 @@ Network::~Network() {
 }
 
 void Network::addNeuron(Neuron* neuron, const std::array<Neuron*, (constants::CE + constants::CI)>& connexions) {
+	//~ assert(constants::CE+constants::CI==1250); // To remove after debugging
 	std::pair<Neuron*, std::array<Neuron*, (constants::CE + constants::CI)>> connexion(neuron, connexions);
 	network.insert(connexion);
 }
@@ -39,6 +39,7 @@ void Network::addNeuron(Neuron* neuron, const std::vector<Neuron*>& connexions) 
 
 void Network::generateConnexions(const std::vector<Neuron*>& neurons) {
 	assert(neurons.size()==constants::NE+constants::NI);
+	assert(constants::NE+constants::NI==constants::N_TOTAL);
 	
 	std::uniform_int_distribution<> distribE(0, constants::NE - 1);
 	std::uniform_int_distribution<> distribI(constants::NE, neurons.size() - 1);
@@ -58,6 +59,7 @@ void Network::generateConnexions(const std::vector<Neuron*>& neurons) {
 		}
 		addNeuron(n, connexions);
 	}
+	generateSenders(neurons);
 }
 
 void Network::generateSenders(const std::vector<Neuron*>& neurons) {
@@ -66,39 +68,21 @@ void Network::generateSenders(const std::vector<Neuron*>& neurons) {
 		send.clear();
 		assert(send.size()==0);
 		addNeuron(n, send);
-		//~ for(auto& c:network[n]) {
-			//~ toSend[c].push_back(n);
-		//~ }
-		
 	}
-	
 	for (auto& n:neurons) {
-			for(auto& c:network[n]) {
-				assert(c!=nullptr);
-				toSend[c].push_back(n);
+		for(auto& c:network[n]) {
+			assert(c!=nullptr);
+			toSend[c].push_back(n);
 		}
-
-		}
-	//~ }
+	}
 }
 
 
 void Network::sendSpike(Neuron*& neur) const {
 	Potential J(neur->getJ());
 	Time t(neur->getCurrentTime());
-	//~ for(auto& n:network.at(neur)) {
 	for(auto& n:(toSend.at(neur))) {
 	assert(n!=nullptr);
-	//~ assert(neur=!nullptr);
 		n->receiveSpike(J, t+constants::D_IN_STEP);
 	}
 }
-
-
-//~ void Network::printConnexions(std::ofstream& file) {
-	//~ for (auto connexions(toSend.begin()); connexions!=toSend.end();++connexions) {
-		//~ for (const auto& neuron:connexions->second)
-		//~ file << neuron << '\t';
-	//~ }
-	//~ file << std::endl << std::endl;
-//~ }

@@ -2,7 +2,6 @@
 #include "Neuron.h"
 #include "Constants.h"
 #include "Simulation.h"
-#include <iostream>
 
 Neuron::Neuron(bool excitatory)
 	: mbPotential(constants::RESET_POTENTIAL),
@@ -40,7 +39,7 @@ Potential Neuron::getJ() const {
 	if (excitatory) {
 		return constants::JE;
 	} else {
-		return -(constants::JI);
+		return constants::JI;
 	}
 }
 
@@ -56,6 +55,7 @@ bool Neuron::update(const double& extI, const Time& stopTime, const double& nois
 	bool spiked(false);
 	while (currentTime<stopTime) {
 		Potential J(buffer[inBuffer(currentTime)]+noise);
+		buffer[inBuffer(currentTime)]=0.0;
 		if (mbPotential>constants::SPIKE_THRESHOLD) {
 			lastSpike = currentTime;
 			++nbSpikes;
@@ -66,7 +66,6 @@ bool Neuron::update(const double& extI, const Time& stopTime, const double& nois
 		} else {
 			updatePotential(extI, J);
 		}
-		buffer[inBuffer(currentTime)]=0.0;
 		++currentTime;
 	}
 	return spiked;
@@ -84,12 +83,13 @@ bool Neuron::update(const Time& stopTime) {
 }	
 
 void Neuron::updatePotential(const double& extI, const Potential& J) {
-	//~ std::cout << J << ' ';
+	//~ std::cout << J << '\t';
 	mbPotential = ODEFactor1*mbPotential + extI*ODEFactor2 + J;
 }
 
 void Neuron::receiveSpike(const Potential& amplitude, const Time& receptionTime) {
 	buffer[inBuffer(receptionTime)]+=amplitude;
+	//~ std::cout << inBuffer(currentTime) << '	' << inBuffer(receptionTime) << std::endl;
 }
 
 void Neuron::receiveSpike(const Neuron* neur, const Time& receptionTime) {
@@ -97,5 +97,5 @@ void Neuron::receiveSpike(const Neuron* neur, const Time& receptionTime) {
 }
 
 unsigned int Neuron::inBuffer(const Time& time) const {
-	return time % (buffer.size());
+	return (time-1) % (buffer.size());
 }

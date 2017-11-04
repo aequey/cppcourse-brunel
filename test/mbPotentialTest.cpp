@@ -82,7 +82,41 @@ TEST (singleNeuron, spikeTimes) {
 	EXPECT_EQ(n.getMbPotential(), 0.0);
 }
 
-//~ TEST (twoNeurons, spikeDelay)
+TEST (twoNeurons, spikeDelay) {
+	Neuron n1;
+	Neuron n2;
+	int j(0), k(0);
+	bool spiked(false);
+	for (int i(0);i<941;++i) {
+		spiked = n1.update(1.01, i, 0.0);
+		n2.update(0.0, i, 0.0);
+		if (spiked) {
+			j=i;
+			n2.receiveSpike(constants::JE, i+constants::D_IN_STEP-1); //LOL
+		}
+		if (n2.getMbPotential()!=0.0) {
+			k=i;
+		}
+	}
+
+	
+	//~ while (currentTime_ <= simulationTime_) {
+		
+		//~ spike = n1.update(currentImput, currentTime_+1, 0.0);
+		
+		//~ if (spike) {
+			//~ n2.receiveSpike(n1.getJ(), constants::D_IN_STEP);
+		//~ }
+		//~ n2.update(0.0, currentTime_+1, 0.0);
+		
+
+	//~ }
+	
+
+
+	EXPECT_EQ(j+constants::D_IN_STEP, k);
+	EXPECT_EQ(n2.getMbPotential(), 0.1);
+}
 
 
 
