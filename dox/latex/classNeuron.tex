@@ -22,7 +22,7 @@ bool \hyperlink{classNeuron_aa21dce996e08173d864c9f4b0198a793}{update} (const do
 \begin{DoxyCompactList}\small\item\em update a \hyperlink{classNeuron}{Neuron} until a given stop\+Time, with a given external current and given noise \end{DoxyCompactList}\item 
 void \hyperlink{classNeuron_a8e54b7a86764bd1445f8a8105c3ba5e2}{receive\+Spike} (const Potential \&amplitude, const Time \&reception\+Time)
 \begin{DoxyCompactList}\small\item\em fills the buffer so that the \hyperlink{classNeuron}{Neuron} receives a spike of a given amplitude at a given time \end{DoxyCompactList}\item 
-void \hyperlink{classNeuron_a1994f85ad163be6ebbad5982bf614627}{receive\+Spike} (const \hyperlink{classNeuron}{Neuron} $\ast$neur, const Time \&reception\+Time)
+void \hyperlink{classNeuron_aa2fb0abb3108ee6cec39773d3f7a0761}{receive\+Spike} (const \hyperlink{classNeuron}{Neuron} $\ast$\&neur, const Time \&reception\+Time)
 \begin{DoxyCompactList}\small\item\em fills the buffer so that the \hyperlink{classNeuron}{Neuron} receives a spike from a given \hyperlink{classNeuron}{Neuron} at a given time \end{DoxyCompactList}\item 
 Potential \hyperlink{classNeuron_a7b0a9570b046fbb67e091d46104c6edc}{get\+Mb\+Potential} () const 
 \begin{DoxyCompactList}\small\item\em returns the membrane potential \end{DoxyCompactList}\item 
@@ -192,12 +192,12 @@ void
 \end{DoxyReturn}
 \index{Neuron@{Neuron}!receive\+Spike@{receive\+Spike}}
 \index{receive\+Spike@{receive\+Spike}!Neuron@{Neuron}}
-\subsubsection[{\texorpdfstring{receive\+Spike(const Neuron $\ast$neur, const Time \&reception\+Time)}{receiveSpike(const Neuron *neur, const Time &receptionTime)}}]{\setlength{\rightskip}{0pt plus 5cm}void Neuron\+::receive\+Spike (
+\subsubsection[{\texorpdfstring{receive\+Spike(const Neuron $\ast$\&neur, const Time \&reception\+Time)}{receiveSpike(const Neuron *&neur, const Time &receptionTime)}}]{\setlength{\rightskip}{0pt plus 5cm}void Neuron\+::receive\+Spike (
 \begin{DoxyParamCaption}
-\item[{const {\bf Neuron} $\ast$}]{neur, }
+\item[{const {\bf Neuron} $\ast$\&}]{neur, }
 \item[{const Time \&}]{reception\+Time}
 \end{DoxyParamCaption}
-)}\hypertarget{classNeuron_a1994f85ad163be6ebbad5982bf614627}{}\label{classNeuron_a1994f85ad163be6ebbad5982bf614627}
+)}\hypertarget{classNeuron_aa2fb0abb3108ee6cec39773d3f7a0761}{}\label{classNeuron_aa2fb0abb3108ee6cec39773d3f7a0761}
 
 
 fills the buffer so that the \hyperlink{classNeuron}{Neuron} receives a spike from a given \hyperlink{classNeuron}{Neuron} at a given time 

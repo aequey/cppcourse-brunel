@@ -10,29 +10,14 @@ Network::Network() {
 	toSend.clear();
 }
 
-Network::~Network() {
-	//~ for (auto connexions(network.begin()); connexions!=network.end();++connexions) {
-		//~ for (auto& neuron:connexions->second) {
-			//~ delete neuron;
-		//~ }
-		//~ delete connexions->first;
-	//~ }
-	//~ for (auto connexions(toSend.begin()); connexions!=toSend.end();++connexions) {
-		//~ for (auto& neuron:connexions->second) {
-			//~ delete neuron;
-		//~ }
-		//~ delete connexions->first;
-	//~ }
-
-}
-
 void Network::addNeuron(Neuron* neuron, const std::array<Neuron*, (constants::CE + constants::CI)>& connexions) {
-	//~ assert(constants::CE+constants::CI==1250); // To remove after debugging
+	assert(neuron!=nullptr);
 	std::pair<Neuron*, std::array<Neuron*, (constants::CE + constants::CI)>> connexion(neuron, connexions);
 	network.insert(connexion);
 }
 
 void Network::addNeuron(Neuron* neuron, const std::vector<Neuron*>& connexions) {
+	assert(neuron!=nullptr);
 	std::pair<Neuron*, std::vector<Neuron*>> connexion(neuron, connexions);
 	toSend.insert(connexion);
 }

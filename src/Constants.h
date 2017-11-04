@@ -28,7 +28,7 @@ namespace constants {
 		// The membrane potential threshold for a spike (in Millivolts)
 		const Potential SPIKE_THRESHOLD(20.0);
 		// The membrane potential a Neuron has at the beginning of the Simulation or after a spike (in Millivolts)
-		const Potential RESET_POTENTIAL(0.0); // (10.0 is given in the paper)
+		const Potential RESET_POTENTIAL(10.0); // (10.0 is given in the paper)
 		// The time a Neuron is refractory after the sending of a spike (in Milliseconds)
 		constexpr Milliseconds REFRACTORY_TIME(2.0);
 		// TAU = R*C (in Milliseconds)

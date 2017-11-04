@@ -23,10 +23,9 @@ public :
 	Network();
 	
 	/*!
-	 * @brief the default constructor of the network
-	 * @param nothing
+	 * @brief default destructor of the network
 	 */
-	~Network();
+	~Network() = default;
 	
 	/*!
 	 * @brief method that creates the input connexions between neurons from given neurons.

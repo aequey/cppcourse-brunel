@@ -14,12 +14,12 @@ Simulation::Simulation()
 Simulation::Simulation(const Milliseconds& simulationTime, const std::string& storeName)
 	: currentTime(0),
 	  simulationTime(simulationTime/constants::H),
-	  storingFile(storeName) {
-		  
-	  assert(simulationTime>=0);
+	  storingFile(storeName) {  
+		assert(simulationTime>=0);
 }
 
 Time Simulation::getCurrentTime() const {
+	assert(currentTime<=0);
 	return currentTime;
 }
 
@@ -28,23 +28,12 @@ bool Simulation::isInInterval(Time toTest, Milliseconds min, Milliseconds max) {
 	return (!(test < min) and test < max);
 }
 
-void Simulation::storeInFile(double toStore, std::ofstream& out) {
-	out << toStore <<std::endl;
-}
-
-void Simulation::storeInFile(const std::vector<Neuron*>& neurons, std::ofstream& out) {
-	for (const auto& neur:neurons) {
-		out << neur->getMbPotential() << '\t';
-	}
-	out << '\n';
-}
-
 void Simulation::simulateANeuron(const double& extI, const Milliseconds& extIBeginning, const Milliseconds& extIEnd) {
 	Neuron neuron;
 	double currentImput(0.0);
 	std::ofstream file;
 	file.open(storingFile);
-	while (currentTime <= simulationTime) {
+	while (currentTime < simulationTime) {
 		file << currentTime*constants::H << '\t' << neuron.getMbPotential() << std::endl;
 		if (isInInterval(currentTime, extIBeginning, extIEnd)) {
 			currentImput = extI;
@@ -66,7 +55,6 @@ void Simulation::simulateTwoNeurons(const double& extI, const Milliseconds& extI
 	
 	std::ofstream file;
 	file.open(storingFile);
-
 	
 	while (currentTime <= simulationTime) {
 		file << currentTime*constants::H << '\t' << n1.getMbPotential() << '\t' << n2.getMbPotential() << std::endl;
@@ -75,7 +63,6 @@ void Simulation::simulateTwoNeurons(const double& extI, const Milliseconds& extI
 		} else {
 			currentImput = 0.0;
 		}
-		
 		bool spike;
 		spike = n1.update(currentImput, currentTime+1, 0.0);
 		
@@ -85,9 +72,7 @@ void Simulation::simulateTwoNeurons(const double& extI, const Milliseconds& extI
 		n2.update(0.0, currentTime+1, 0.0);
 		
 		++currentTime;
-
 	}
-	
 	file.close();
 }
 
@@ -104,6 +89,7 @@ void Simulation::simulateNetwork() {
 		neur.push_back(new Neuron(false));
 	}
 	assert(neur.size()==constants::NE+constants::NI);
+	assert(neur.size()==constants::N_TOTAL);
 	
 	std::cout << "Generating connexions..." << std::endl;
 	net.generateConnexions(neur);
@@ -112,24 +98,25 @@ void Simulation::simulateNetwork() {
 	std::ofstream file;
 	file.open(storingFile);
 
-	std::cout << "Starting simulation..." << std::endl;
-	while (currentTime <= simulationTime) {
+	std::cout << "Simulating the network..." << std::endl;
+	while (currentTime < simulationTime) {
 		
 		bool spike;
 		for (size_t i(0); i<neur.size();++i) {
+			assert(neur[i]!=nullptr);
+			spike = false;
 			spike = neur[i]->update(currentTime+1);
 		
 			if (spike) {
 				net.sendSpike(neur[i]);
 					file << currentTime << '\t' << i;
 					file << '\n';
-
 			}
 		}
-		std::cout << currentTime*0.1 << " ms" << std::endl;
 		++currentTime;
-
 	}
-	
+	assert(currentTime==simulationTime);
 	file.close();
+	std::cout << "End of the simulation" << std::endl;
+	std::cout << "Results have been saved on this file : " << storingFile << std::endl;
 }

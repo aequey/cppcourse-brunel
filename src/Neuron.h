@@ -65,7 +65,7 @@ public :
 	 * @param the Neuron that sends the spike and the time when it should arrive
 	 * @return void
 	 */
-	void receiveSpike(const Neuron* neur, const Time& receptionTime);
+	void receiveSpike(const Neuron*& neur, const Time& receptionTime);
 	
 	/*!
 	 * @brief returns the membrane potential
@@ -108,7 +108,7 @@ private :
 	unsigned int nbSpikes;	///< the number of spikes the neuron has sent during its lifetime
 	Time lastSpike;			///< the time of the last spike the Neuron sent
 	Time currentTime;		///< the time it is currently in the Neuron
-	std::array<Potential, constants::D_IN_STEP+1> buffer;	///< a buffer that implements the transmission delay of spikes
+	std::array<Potential, 2*constants::D_IN_STEP> buffer;	///< a buffer that implements the transmission delay of spikes
 	bool excitatory;		///< tells if a Neuron is excitatory (true) or inhibitory (false). this changes the amplitude of the spike
 	
 	static constexpr Time refractoryStep = (constants::REFRACTORY_TIME/constants::H);	///< the refractory time given in steps

@@ -30,6 +30,11 @@ public :
 	Simulation(const Milliseconds& simulationTime, const std::string& storeName);
 
 	/*!
+	 * @brief default destructor of Simulation
+	 */
+	~Simulation() = default;
+
+	/*!
 	 * @brief gives the time of the Simulation
 	 * @param nothing
 	 * @return the time of the Simulation
@@ -70,20 +75,6 @@ private :
 	 * @return true if the time to test is in the interval, false if not
 	 */
 	bool isInInterval(Time toTest, Milliseconds min, Milliseconds max);
-
-	/*!
-	 * @brief utilitary method that allows to store in an ofstream a given number
-	 * @param the number to store and the ofstream
-	 * @return void
-	 */
-	void storeInFile(double toStore, std::ofstream& out);
-
-	/*!
-	 * @brief utilitary method that allows to store in an ofstream the potentials of a group of eurons
-	 * @param the vectorss of neurons (pointers) and the ofstream
-	 * @return void
-	 */
-	void storeInFile(const std::vector<Neuron*>& neurons, std::ofstream& out);
 
 };
 
