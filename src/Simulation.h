@@ -1,10 +1,12 @@
 #ifndef SIMULATION_H
 #define SIMULATION_H
 
-#include <string>
 #include <vector>
+#include <string>
+
 #include "Constants.h"
 #include "Neuron.h"
+
 
 ///< the class that manages the simulations.
 ///< It allows to simulate one Neuron, two neurons or the complete Network with parameters given in Constants.h

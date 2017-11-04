@@ -1,9 +1,9 @@
 #ifndef NEURON_H
 #define NEURON_H
 
-#include "Constants.h"
-#include "Simulation.h"
 #include <array>
+
+#include "Constants.h"
 
 
 ///< A class that represents a neuron.
@@ -29,50 +29,20 @@ public :
 	 * @brief default destructor of Neuron
 	 */
 	~Neuron() = default;
-	
-	/*!
-	 * @brief update a Neuron with a given current until a given stopTime. Generates random noise from a Poisson distribution
-	 * @param the external current and the stopTime
-	 * @return true if the Neuron has spiked during the update time, false if not
-	 */
-	bool update(const double& extI, const Time& stopTime);
 
-	/*!
-	 * @brief update a Neuron until a given stopTime. There's no external current and the noise is randomly generated from a Poisson distribution
-	 * @param the stopTime
-	 * @return true if the Neuron has spiked during the update time, false if not
-	 */
-	bool update(const Time& stopTime);
-
-	/*!
-	 * @brief update a Neuron until a given stopTime, with a given external current and given noise
-	 * @param the external current, the stopTime and the noise
-	 * @return true if the Neuron has spiked during the update time, false if not
-	 */
-	bool update(const double& extI, const Time& stopTime, const double& noise);
-
-	/*!
-	 * @brief fills the buffer so that the Neuron receives a spike of a given amplitude at a given time
-	 * @brief the time shall not exceed the current time + constants::D
-	 * @param the amplitude of the spike and the time when it should arrive
-	 * @return void
-	 */
-	void receiveSpike(const Potential& amplitude, const Time & receptionTime);
-
-	/*!
-	 * @brief fills the buffer so that the Neuron receives a spike from a given Neuron at a given time
-	 * @brief this implementation allows to make a difference between excitatory or inhibitory Neuron
-	 * @param the Neuron that sends the spike and the time when it should arrive
-	 * @return void
-	 */
-	void receiveSpike(const Neuron*& neur, const Time& receptionTime);
-	
 	/*!
 	 * @brief returns the membrane potential
 	 * @param nothing
 	 * @return the membrane potential
 	 */
 	Potential getMbPotential() const;
+	
+	/*!
+	 * @brief returns the time of the last spike of the Neuron
+	 * @param nothing
+	 * @return the time of the last spike of the neuron
+	 */
+	Time getSpikeTime() const;
 
 	/*!
 	 * @brief returns the number of spikes the Neuron has already had
@@ -89,18 +59,48 @@ public :
 	Time getCurrentTime() const;
 
 	/*!
-	 * @brief returns the time of the last spike of the Neuron
-	 * @param nothing
-	 * @return the time of the last spike of the neuron
-	 */
-	Time getSpikeTime() const;
-
-	/*!
 	 * @brief returns the amplitude of the spike the Neuron sends (depends wether it's excitatory or inhibitory)
 	 * @param nothing
 	 * @return the amplitude of the spike
 	 */
 	Potential getJ() const;
+
+	/*!
+	 * @brief update a Neuron until a given stopTime, with a given external current and given noise
+	 * @param the external current, the stopTime and the noise
+	 * @return true if the Neuron has spiked during the update time, false if not
+	 */
+	bool update(const double& extI, const Time& stopTime, const double& noise);
+	
+	/*!
+	 * @brief update a Neuron with a given current until a given stopTime. Generates random noise from a Poisson distribution
+	 * @param the external current and the stopTime
+	 * @return true if the Neuron has spiked during the update time, false if not
+	 */
+	bool update(const double& extI, const Time& stopTime);
+
+	/*!
+	 * @brief update a Neuron until a given stopTime. There's no external current and the noise is randomly generated from a Poisson distribution
+	 * @param the stopTime
+	 * @return true if the Neuron has spiked during the update time, false if not
+	 */
+	bool update(const Time& stopTime);
+
+	/*!
+	 * @brief fills the buffer so that the Neuron receives a spike of a given amplitude at a given time
+	 * @brief the time shall not exceed the current time + constants::D
+	 * @param the amplitude of the spike and the time when it should arrive
+	 * @return void
+	 */
+	void receiveSpike(const Potential& amplitude, const Time & receptionTime);
+
+	/*!
+	 * @brief fills the buffer so that the Neuron receives a spike from a given Neuron at a given time
+	 * @brief this implementation allows to make a difference between excitatory or inhibitory Neuron
+	 * @param the Neuron that sends the spike and the time when it should arrive
+	 * @return void
+	 */
+	void receiveSpike(const Neuron*& neur, const Time& receptionTime);
 	
 private :
 

@@ -1,12 +1,13 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 
-#include <unordered_map>
 #include <vector>
 #include <array>
+#include <unordered_map>
 #include <fstream>
-#include "Neuron.h"
+
 #include "Constants.h"
+#include "Neuron.h"
 
 
 ///< a class that creates and manages the connexions between neurons.
@@ -35,15 +36,7 @@ public :
 	 * @return void
 	 */	
 	void generateConnexions(const std::vector<Neuron*>& neurons);
-	
-	/*!
-	 * @brief a method that calculates the connexions each Neuron sends from the connexions each Neuron receives.
-	 * @brief this second version of the network is more efficient when a neuron has to send a spike to all its receivers.
-	 * @param the group of Neuron (a vector) we want the output connexions to be generated
-	 * @return void
-	 */
-	void generateSenders(const std::vector<Neuron*>& neurons);
-	
+		
 	/*!
 	 * @brief a method that takes a Neuron and send a spike to all its receivers.
 	 * @param the Neuron we want to spike
@@ -56,6 +49,13 @@ private :
 	std::unordered_map<Neuron*, std::array<Neuron*, (constants::CE + constants::CI)>> network; ///< a map of neurons with their respective input connexions 
 	std::unordered_map<Neuron*, std::vector<Neuron*>> toSend; ///< a map of neurons with their respective output connexions
 	
+	/*!
+	 * @brief utility method that calculates the connexions each Neuron sends from the connexions each Neuron receives.
+	 * @brief this second version of the network is more efficient when a neuron has to send a spike to all its receivers.
+	 * @param the group of Neuron (a vector) we want the output connexions to be generated
+	 * @return void
+	 */
+	void generateSenders(const std::vector<Neuron*>& neurons);
 	
 	/*!
 	 * @brief an utilitary method that adds a Neuron and its output connexions to the attribute Network::network

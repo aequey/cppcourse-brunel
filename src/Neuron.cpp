@@ -1,7 +1,14 @@
 #include <random>
-#include "Neuron.h"
+
 #include "Constants.h"
-#include "Simulation.h"
+#include "Neuron.h"
+
+
+Neuron::Neuron()
+	  // By default, a Neuron is excitatory
+	: Neuron(true) {}
+
+////////////////////////////////////////////////////////////////////////
 
 Neuron::Neuron(bool excitatory)
 	: mbPotential(constants::RESET_POTENTIAL),
@@ -14,24 +21,31 @@ Neuron::Neuron(bool excitatory)
 		  }
 	  }
 
-Neuron::Neuron()
-	: Neuron(true) {}
+////////////////////////////////////////////////////////////////////////
 
 double Neuron::getMbPotential() const {
 	return mbPotential;
 }
 	
-unsigned int Neuron::getNbSpikes() const {
-	return nbSpikes;
-}
+////////////////////////////////////////////////////////////////////////
 
 Time Neuron::getSpikeTime() const {
 	return lastSpike;
 }
 
+////////////////////////////////////////////////////////////////////////
+
+unsigned int Neuron::getNbSpikes() const {
+	return nbSpikes;
+}
+
+////////////////////////////////////////////////////////////////////////
+
 Time Neuron::getCurrentTime() const {
 	return currentTime;
 }
+
+////////////////////////////////////////////////////////////////////////
 
 Potential Neuron::getJ() const {
 	if (excitatory) {
@@ -42,17 +56,12 @@ Potential Neuron::getJ() const {
 	}
 }
 
-bool Neuron::isRefractory() {
-	if (nbSpikes>0) {
-		return currentTime < (lastSpike+refractoryStep);
-	} else {
-		return false;
-	}
-}
+////////////////////////////////////////////////////////////////////////
 
 bool Neuron::update(const double& extI, const Time& stopTime, const double& noise) {
 	assert(stopTime>=currentTime);
 	bool spiked(false);
+	// We suppose the noise is the same for every step of the update (only one step in our simulations)
 	while (currentTime<stopTime) {
 		Potential J(buffer[inBuffer(currentTime)]+noise);
 		buffer[inBuffer(currentTime)]=0.0;
@@ -72,32 +81,62 @@ bool Neuron::update(const double& extI, const Time& stopTime, const double& nois
 	return spiked;
 }
 
+////////////////////////////////////////////////////////////////////////
+
 bool Neuron::update(const double& extI, const Time& stopTime) {
+	// Creation of random distribution for external spikes.
+	// The same distribution is used for every neuron at every time of the simulation.
 	static std::random_device rd;
 	static std::mt19937 gen(rd());
 	static std::poisson_distribution<int> d(constants::DISTRIBUTION);
+	// Update with a random number taken from this distribution as noise
 	return update(extI, stopTime, d(gen)*constants::JE);
 }
 
+////////////////////////////////////////////////////////////////////////
+
 bool Neuron::update(const Time& stopTime) {
+	// update with no external current, but random spikes
 	return update(0.0, stopTime);
 }	
 
-void Neuron::updatePotential(const double& extI, const Potential& J) {
-	mbPotential = ODEFactor1*mbPotential + extI*ODEFactor2 + J;
-}
+////////////////////////////////////////////////////////////////////////
 
 void Neuron::receiveSpike(const Potential& amplitude, const Time& receptionTime) {
 	assert(receptionTime>=currentTime);
 	buffer[inBuffer(receptionTime)]+=amplitude;
 }
 
+////////////////////////////////////////////////////////////////////////
+
 void Neuron::receiveSpike(const Neuron*& neur, const Time& receptionTime) {
 	assert(neur!=nullptr);
 	assert(receptionTime>=currentTime);
+	// J is not the same if the Neuron is excitatory or inhibitory
 	receiveSpike(neur->getJ(), receptionTime);
 }
 
+////////////////////////////////////////////////////////////////////////
+
+bool Neuron::isRefractory() {
+	if (nbSpikes>0) {
+		return currentTime < (lastSpike+refractoryStep);
+	} else {
+		return false;
+	}
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void Neuron::updatePotential(const double& extI, const Potential& J) {
+	// This is the result of the differential equation.
+	// Every input that comes from other neurons (spikes in buffer and noise) is in J
+	mbPotential = ODEFactor1*mbPotential + extI*ODEFactor2 + J;
+}
+
+////////////////////////////////////////////////////////////////////////
+
 unsigned int Neuron::inBuffer(const Time& time) const {
+	// The equation given in lectures has not the -1, but it seems here to give a too big time.
 	return (time-1) % (buffer.size());
 }

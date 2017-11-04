@@ -1,10 +1,10 @@
-#include "Neuron.h"
 #include "Simulation.h"
+
 
 int main() {
 	
 	/// Create a Simulation 
-	Simulation sim(100.0, "../res/data2.dat");
+	Simulation sim(600.0, "../res/data.dat");
 
 	/// Uncomment this if you want to simulate eiher one Neuron or two neurons with a connexion
 	/*
