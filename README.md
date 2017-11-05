@@ -14,24 +14,34 @@ In our simulations, we play with two parameters : G, the ratio of strength of co
 A balanced network is when G and ETA are compensating each other.
 
 Our goal is to reproduce four results of the paper (we save the spiking times of each neuron) :
+
 A) G=3    ETA=2
+
 B) G=6	  ETA=4
+
 C) G=5	  ETA=2
+
 D) G=4.5	ETA=0.9
 
 A normal simulation runs for a simulation time of 1000 ms.
 
 Here is an indicative time that takes a simulation of 1000 ms for each of the Brunel parameters with EPFL computers :
+
 A) ~55 s
+
 B) ~30 s
+
 C) ~20 s
+
 D) ~10 s
 
 The time of the simulation strongly depends on the number of spikes sent in each ster of simultion.
 
 # How to use the program
 To run the simulation, first compile the program : go on build directory and type :
+
 cmake ..
+
 make
 
 You can execute the simulation by typing ./main (or run the tests with ./neuronTest) in the same directory.
@@ -43,6 +53,8 @@ If you want to change the simulation time, go to src/main.cpp and change the par
 res/Graph.ipynb allows you to have graphs of  the results using for example jupyter notebook.
 
 The code is commented to be compatible with Doxygen. To see it go to build and type : 
+
 make doc
+
 Before doing this, ensure you have typed cmake ..
 You'll find the documentaton on dox/html/index.html
