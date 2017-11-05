@@ -1,7 +1,3 @@
-/build/*
-/res/data*
-/dox/*
-
 # Prerequisites
 *.d
 
