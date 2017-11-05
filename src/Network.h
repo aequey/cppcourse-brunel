@@ -10,9 +10,7 @@
 #include "Neuron.h"
 
 
-///< a class that creates and manages the connexions between neurons.
-///< we talk about a Network of neurons.
-
+class Network; ///< a class that creates and manages the connexions between neurons a Network of neurons.
 
 class Network {
 public :

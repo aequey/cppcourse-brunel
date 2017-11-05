@@ -2,6 +2,11 @@
 \label{classNeuron}\index{Neuron@{Neuron}}
 
 
+A class that represents a neuron. They are two types of neurons \+: excitatory and inhibitory (the change is only in amplitude of the spike)  
+
+
+
+
 {\ttfamily \#include $<$Neuron.\+h$>$}
 
 \subsection*{Public Member Functions}
@@ -14,30 +19,32 @@
 \hyperlink{classNeuron_a7350045966914cd4bcddac6706e7d864}{$\sim$\+Neuron} ()=default\hypertarget{classNeuron_a7350045966914cd4bcddac6706e7d864}{}\label{classNeuron_a7350045966914cd4bcddac6706e7d864}
 
 \begin{DoxyCompactList}\small\item\em default destructor of \hyperlink{classNeuron}{Neuron} \end{DoxyCompactList}\item 
-bool \hyperlink{classNeuron_a9692066fbcd0d632246970c627784341}{update} (const double \&extI, const Time \&stop\+Time)
-\begin{DoxyCompactList}\small\item\em update a \hyperlink{classNeuron}{Neuron} with a given current until a given stop\+Time. Generates random noise from a Poisson distribution \end{DoxyCompactList}\item 
-bool \hyperlink{classNeuron_ae2e3e2ebf571a295c2858ee48efbecce}{update} (const Time \&stop\+Time)
-\begin{DoxyCompactList}\small\item\em update a \hyperlink{classNeuron}{Neuron} until a given stop\+Time. There\textquotesingle{}s no external current and the noise is randomly generated from a Poisson distribution \end{DoxyCompactList}\item 
-bool \hyperlink{classNeuron_aa21dce996e08173d864c9f4b0198a793}{update} (const double \&extI, const Time \&stop\+Time, const double \&noise)
-\begin{DoxyCompactList}\small\item\em update a \hyperlink{classNeuron}{Neuron} until a given stop\+Time, with a given external current and given noise \end{DoxyCompactList}\item 
-void \hyperlink{classNeuron_a8e54b7a86764bd1445f8a8105c3ba5e2}{receive\+Spike} (const Potential \&amplitude, const Time \&reception\+Time)
-\begin{DoxyCompactList}\small\item\em fills the buffer so that the \hyperlink{classNeuron}{Neuron} receives a spike of a given amplitude at a given time \end{DoxyCompactList}\item 
-void \hyperlink{classNeuron_aa2fb0abb3108ee6cec39773d3f7a0761}{receive\+Spike} (const \hyperlink{classNeuron}{Neuron} $\ast$\&neur, const Time \&reception\+Time)
-\begin{DoxyCompactList}\small\item\em fills the buffer so that the \hyperlink{classNeuron}{Neuron} receives a spike from a given \hyperlink{classNeuron}{Neuron} at a given time \end{DoxyCompactList}\item 
 Potential \hyperlink{classNeuron_a7b0a9570b046fbb67e091d46104c6edc}{get\+Mb\+Potential} () const 
 \begin{DoxyCompactList}\small\item\em returns the membrane potential \end{DoxyCompactList}\item 
+void \hyperlink{classNeuron_a795cfa1c74ddae56cca00cd3aa8790f8}{set\+Mb\+Potential} (const Potential \&potential)
+\begin{DoxyCompactList}\small\item\em method that allows to change the membrane potential of the \hyperlink{classNeuron}{Neuron}. Used in the tests to ensure it has the good value at the beginning \end{DoxyCompactList}\item 
+Time \hyperlink{classNeuron_a69a6370d2c8aa4105d30f543bf8dac00}{get\+Spike\+Time} () const 
+\begin{DoxyCompactList}\small\item\em returns the time of the last spike of the \hyperlink{classNeuron}{Neuron} \end{DoxyCompactList}\item 
 unsigned int \hyperlink{classNeuron_a080fe09731808e0b8210713a7e3fdc3a}{get\+Nb\+Spikes} () const 
 \begin{DoxyCompactList}\small\item\em returns the number of spikes the \hyperlink{classNeuron}{Neuron} has already had \end{DoxyCompactList}\item 
 Time \hyperlink{classNeuron_a79e23734d7cd15d93db681f06df18293}{get\+Current\+Time} () const 
 \begin{DoxyCompactList}\small\item\em returns the time in the \hyperlink{classNeuron}{Neuron} Referential \end{DoxyCompactList}\item 
-Time \hyperlink{classNeuron_a69a6370d2c8aa4105d30f543bf8dac00}{get\+Spike\+Time} () const 
-\begin{DoxyCompactList}\small\item\em returns the time of the last spike of the \hyperlink{classNeuron}{Neuron} \end{DoxyCompactList}\item 
 Potential \hyperlink{classNeuron_a4f92588d104d30c752492e72ee210df8}{getJ} () const 
-\begin{DoxyCompactList}\small\item\em returns the amplitude of the spike the \hyperlink{classNeuron}{Neuron} sends (depends wether it\textquotesingle{}s excitatory or inhibitory) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em returns the amplitude of the spike the \hyperlink{classNeuron}{Neuron} sends (depends wether it\textquotesingle{}s excitatory or inhibitory) \end{DoxyCompactList}\item 
+bool \hyperlink{classNeuron_aa21dce996e08173d864c9f4b0198a793}{update} (const double \&extI, const Time \&stop\+Time, const double \&noise)
+\begin{DoxyCompactList}\small\item\em update a \hyperlink{classNeuron}{Neuron} until a given stop\+Time, with a given external current and given noise \end{DoxyCompactList}\item 
+bool \hyperlink{classNeuron_a9692066fbcd0d632246970c627784341}{update} (const double \&extI, const Time \&stop\+Time)
+\begin{DoxyCompactList}\small\item\em update a \hyperlink{classNeuron}{Neuron} with a given current until a given stop\+Time. Generates random noise from a Poisson distribution \end{DoxyCompactList}\item 
+bool \hyperlink{classNeuron_ae2e3e2ebf571a295c2858ee48efbecce}{update} (const Time \&stop\+Time)
+\begin{DoxyCompactList}\small\item\em update a \hyperlink{classNeuron}{Neuron} until a given stop\+Time. There\textquotesingle{}s no external current and the noise is randomly generated from a Poisson distribution \end{DoxyCompactList}\item 
+void \hyperlink{classNeuron_a8e54b7a86764bd1445f8a8105c3ba5e2}{receive\+Spike} (const Potential \&amplitude, const Time \&reception\+Time)
+\begin{DoxyCompactList}\small\item\em fills the buffer so that the \hyperlink{classNeuron}{Neuron} receives a spike of a given amplitude at a given time \end{DoxyCompactList}\item 
+void \hyperlink{classNeuron_aa2fb0abb3108ee6cec39773d3f7a0761}{receive\+Spike} (const \hyperlink{classNeuron}{Neuron} $\ast$\&neur, const Time \&reception\+Time)
+\begin{DoxyCompactList}\small\item\em fills the buffer so that the \hyperlink{classNeuron}{Neuron} receives a spike from a given \hyperlink{classNeuron}{Neuron} at a given time \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-$<$ A class that represents a neuron. They are two types of neurons \+: excitatory and inhibitory (the change is only in amplitude of the spike) 
+A class that represents a neuron. They are two types of neurons \+: excitatory and inhibitory (the change is only in amplitude of the spike) 
 
 \subsection{Constructor \& Destructor Documentation}
 \index{Neuron@{Neuron}!Neuron@{Neuron}}
@@ -210,6 +217,46 @@ this implementation allows to make a difference between excitatory or inhibitory
 \begin{DoxyReturn}{Returns}
 void 
 \end{DoxyReturn}
+\index{Neuron@{Neuron}!set\+Mb\+Potential@{set\+Mb\+Potential}}
+\index{set\+Mb\+Potential@{set\+Mb\+Potential}!Neuron@{Neuron}}
+\subsubsection[{\texorpdfstring{set\+Mb\+Potential(const Potential \&potential)}{setMbPotential(const Potential &potential)}}]{\setlength{\rightskip}{0pt plus 5cm}void Neuron\+::set\+Mb\+Potential (
+\begin{DoxyParamCaption}
+\item[{const Potential \&}]{potential}
+\end{DoxyParamCaption}
+)}\hypertarget{classNeuron_a795cfa1c74ddae56cca00cd3aa8790f8}{}\label{classNeuron_a795cfa1c74ddae56cca00cd3aa8790f8}
+
+
+method that allows to change the membrane potential of the \hyperlink{classNeuron}{Neuron}. Used in the tests to ensure it has the good value at the beginning 
+
+
+\begin{DoxyParams}{Parameters}
+{\em the} & new potential of the \hyperlink{classNeuron}{Neuron} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\index{Neuron@{Neuron}!update@{update}}
+\index{update@{update}!Neuron@{Neuron}}
+\subsubsection[{\texorpdfstring{update(const double \&ext\+I, const Time \&stop\+Time, const double \&noise)}{update(const double &extI, const Time &stopTime, const double &noise)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Neuron\+::update (
+\begin{DoxyParamCaption}
+\item[{const double \&}]{extI, }
+\item[{const Time \&}]{stop\+Time, }
+\item[{const double \&}]{noise}
+\end{DoxyParamCaption}
+)}\hypertarget{classNeuron_aa21dce996e08173d864c9f4b0198a793}{}\label{classNeuron_aa21dce996e08173d864c9f4b0198a793}
+
+
+update a \hyperlink{classNeuron}{Neuron} until a given stop\+Time, with a given external current and given noise 
+
+
+\begin{DoxyParams}{Parameters}
+{\em the} & external current, the stop\+Time and the noise \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the \hyperlink{classNeuron}{Neuron} has spiked during the update time, false if not 
+\end{DoxyReturn}
 \index{Neuron@{Neuron}!update@{update}}
 \index{update@{update}!Neuron@{Neuron}}
 \subsubsection[{\texorpdfstring{update(const double \&ext\+I, const Time \&stop\+Time)}{update(const double &extI, const Time &stopTime)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Neuron\+::update (
@@ -244,27 +291,6 @@ update a \hyperlink{classNeuron}{Neuron} until a given stop\+Time. There\textquo
 
 \begin{DoxyParams}{Parameters}
 {\em the} & stop\+Time \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-true if the \hyperlink{classNeuron}{Neuron} has spiked during the update time, false if not 
-\end{DoxyReturn}
-\index{Neuron@{Neuron}!update@{update}}
-\index{update@{update}!Neuron@{Neuron}}
-\subsubsection[{\texorpdfstring{update(const double \&ext\+I, const Time \&stop\+Time, const double \&noise)}{update(const double &extI, const Time &stopTime, const double &noise)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Neuron\+::update (
-\begin{DoxyParamCaption}
-\item[{const double \&}]{extI, }
-\item[{const Time \&}]{stop\+Time, }
-\item[{const double \&}]{noise}
-\end{DoxyParamCaption}
-)}\hypertarget{classNeuron_aa21dce996e08173d864c9f4b0198a793}{}\label{classNeuron_aa21dce996e08173d864c9f4b0198a793}
-
-
-update a \hyperlink{classNeuron}{Neuron} until a given stop\+Time, with a given external current and given noise 
-
-
-\begin{DoxyParams}{Parameters}
-{\em the} & external current, the stop\+Time and the noise \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}

@@ -90,6 +90,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
+<p>a class that creates and manages the connexions between neurons a <a class="el" href="classNetwork.html" title="a class that creates and manages the connexions between neurons a Network of neurons. ">Network</a> of neurons.  
+ <a href="classNetwork.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="Network_8h_source.html">Network.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -104,15 +107,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad8b5ad511556baadcbc557f3e7beff69"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork.html#ad8b5ad511556baadcbc557f3e7beff69">generateConnexions</a> (const std::vector&lt; <a class="el" href="classNeuron.html">Neuron</a> * &gt; &amp;neurons)</td></tr>
 <tr class="memdesc:ad8b5ad511556baadcbc557f3e7beff69"><td class="mdescLeft">&#160;</td><td class="mdescRight">method that creates the input connexions between neurons from given neurons.  <a href="#ad8b5ad511556baadcbc557f3e7beff69">More...</a><br /></td></tr>
 <tr class="separator:ad8b5ad511556baadcbc557f3e7beff69"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99a198d49d4b4c6ea2c247264ff774ea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork.html#a99a198d49d4b4c6ea2c247264ff774ea">generateSenders</a> (const std::vector&lt; <a class="el" href="classNeuron.html">Neuron</a> * &gt; &amp;neurons)</td></tr>
-<tr class="memdesc:a99a198d49d4b4c6ea2c247264ff774ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">a method that calculates the connexions each <a class="el" href="classNeuron.html">Neuron</a> sends from the connexions each <a class="el" href="classNeuron.html">Neuron</a> receives.  <a href="#a99a198d49d4b4c6ea2c247264ff774ea">More...</a><br /></td></tr>
-<tr class="separator:a99a198d49d4b4c6ea2c247264ff774ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c444d79895bee27bff94aa47bb45733"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNetwork.html#a8c444d79895bee27bff94aa47bb45733">sendSpike</a> (<a class="el" href="classNeuron.html">Neuron</a> *&amp;neur) const </td></tr>
-<tr class="memdesc:a8c444d79895bee27bff94aa47bb45733"><td class="mdescLeft">&#160;</td><td class="mdescRight">a method that takes a <a class="el" href="classNeuron.html">Neuron</a> and send a spike to all its receivers.  <a href="#a8c444d79895bee27bff94aa47bb45733">More...</a><br /></td></tr>
+<tr class="memdesc:a8c444d79895bee27bff94aa47bb45733"><td class="mdescLeft">&#160;</td><td class="mdescRight">a method that takes a <a class="el" href="classNeuron.html" title="A class that represents a neuron. They are two types of neurons : excitatory and inhibitory (the chan...">Neuron</a> and send a spike to all its receivers.  <a href="#a8c444d79895bee27bff94aa47bb45733">More...</a><br /></td></tr>
 <tr class="separator:a8c444d79895bee27bff94aa47bb45733"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>&lt; a class that creates and manages the connexions between neurons. we talk about a <a class="el" href="classNetwork.html">Network</a> of neurons. </p>
+<div class="textblock"><p>a class that creates and manages the connexions between neurons a <a class="el" href="classNetwork.html" title="a class that creates and manages the connexions between neurons a Network of neurons. ">Network</a> of neurons. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a3cc2fb4f8fa4d507077e8da85ce5a1c8"></a>
 <div class="memitem">
@@ -155,32 +155,7 @@ Public Member Functions</h2></td></tr>
 <p>method that creates the input connexions between neurons from given neurons. </p>
 <p>connexions are randomly generated (each neuron receives a given number of connexions from excitatory and inhibitory neurons) the number of connexions of each neuron is given in <a class="el" href="Constants_8h_source.html">Constants.h</a> (CE excitatory, CI inhibitory) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">the</td><td>group of <a class="el" href="classNeuron.html">Neuron</a> (a vector) we want the input connexions to be generated </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="a99a198d49d4b4c6ea2c247264ff774ea"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Network::generateSenders </td>
-          <td>(</td>
-          <td class="paramtype">const std::vector&lt; <a class="el" href="classNeuron.html">Neuron</a> * &gt; &amp;&#160;</td>
-          <td class="paramname"><em>neurons</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>a method that calculates the connexions each <a class="el" href="classNeuron.html">Neuron</a> sends from the connexions each <a class="el" href="classNeuron.html">Neuron</a> receives. </p>
-<p>this second version of the network is more efficient when a neuron has to send a spike to all its receivers. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">the</td><td>group of <a class="el" href="classNeuron.html">Neuron</a> (a vector) we want the output connexions to be generated </td></tr>
+    <tr><td class="paramname">the</td><td>group of <a class="el" href="classNeuron.html" title="A class that represents a neuron. They are two types of neurons : excitatory and inhibitory (the chan...">Neuron</a> (a vector) we want the input connexions to be generated </td></tr>
   </table>
   </dd>
 </dl>
@@ -202,10 +177,10 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>a method that takes a <a class="el" href="classNeuron.html">Neuron</a> and send a spike to all its receivers. </p>
+<p>a method that takes a <a class="el" href="classNeuron.html" title="A class that represents a neuron. They are two types of neurons : excitatory and inhibitory (the chan...">Neuron</a> and send a spike to all its receivers. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">the</td><td><a class="el" href="classNeuron.html">Neuron</a> we want to spike </td></tr>
+    <tr><td class="paramname">the</td><td><a class="el" href="classNeuron.html" title="A class that represents a neuron. They are two types of neurons : excitatory and inhibitory (the chan...">Neuron</a> we want to spike </td></tr>
   </table>
   </dd>
 </dl>

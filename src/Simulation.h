@@ -8,12 +8,10 @@
 #include "Neuron.h"
 
 
-///< the class that manages the simulations.
-///< It allows to simulate one Neuron, two neurons or the complete Network with parameters given in Constants.h
+// predeclaration of class Neuron
+class Neuron;
 
-
-class Neuron; ///< predeclaration of class Neuron
-
+class Simulation;///< the class that manages the simulations. It allows to simulate one Neuron, two neurons or the complete Network with parameters given in Constants.h
 
 class Simulation {
 public :

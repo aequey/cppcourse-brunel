@@ -2,6 +2,11 @@
 \label{classNetwork}\index{Network@{Network}}
 
 
+a class that creates and manages the connexions between neurons a \hyperlink{classNetwork}{Network} of neurons.  
+
+
+
+
 {\ttfamily \#include $<$Network.\+h$>$}
 
 \subsection*{Public Member Functions}
@@ -14,14 +19,12 @@
 \begin{DoxyCompactList}\small\item\em default destructor of the network \end{DoxyCompactList}\item 
 void \hyperlink{classNetwork_ad8b5ad511556baadcbc557f3e7beff69}{generate\+Connexions} (const std\+::vector$<$ \hyperlink{classNeuron}{Neuron} $\ast$ $>$ \&neurons)
 \begin{DoxyCompactList}\small\item\em method that creates the input connexions between neurons from given neurons. \end{DoxyCompactList}\item 
-void \hyperlink{classNetwork_a99a198d49d4b4c6ea2c247264ff774ea}{generate\+Senders} (const std\+::vector$<$ \hyperlink{classNeuron}{Neuron} $\ast$ $>$ \&neurons)
-\begin{DoxyCompactList}\small\item\em a method that calculates the connexions each \hyperlink{classNeuron}{Neuron} sends from the connexions each \hyperlink{classNeuron}{Neuron} receives. \end{DoxyCompactList}\item 
 void \hyperlink{classNetwork_a8c444d79895bee27bff94aa47bb45733}{send\+Spike} (\hyperlink{classNeuron}{Neuron} $\ast$\&neur) const 
 \begin{DoxyCompactList}\small\item\em a method that takes a \hyperlink{classNeuron}{Neuron} and send a spike to all its receivers. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-$<$ a class that creates and manages the connexions between neurons. we talk about a \hyperlink{classNetwork}{Network} of neurons. 
+a class that creates and manages the connexions between neurons a \hyperlink{classNetwork}{Network} of neurons. 
 
 \subsection{Constructor \& Destructor Documentation}
 \index{Network@{Network}!Network@{Network}}
@@ -57,25 +60,6 @@ method that creates the input connexions between neurons from given neurons.
 connexions are randomly generated (each neuron receives a given number of connexions from excitatory and inhibitory neurons) the number of connexions of each neuron is given in \hyperlink{Constants_8h_source}{Constants.\+h} (CE excitatory, CI inhibitory) 
 \begin{DoxyParams}{Parameters}
 {\em the} & group of \hyperlink{classNeuron}{Neuron} (a vector) we want the input connexions to be generated \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-void 
-\end{DoxyReturn}
-\index{Network@{Network}!generate\+Senders@{generate\+Senders}}
-\index{generate\+Senders@{generate\+Senders}!Network@{Network}}
-\subsubsection[{\texorpdfstring{generate\+Senders(const std\+::vector$<$ Neuron $\ast$ $>$ \&neurons)}{generateSenders(const std::vector< Neuron * > &neurons)}}]{\setlength{\rightskip}{0pt plus 5cm}void Network\+::generate\+Senders (
-\begin{DoxyParamCaption}
-\item[{const std\+::vector$<$ {\bf Neuron} $\ast$ $>$ \&}]{neurons}
-\end{DoxyParamCaption}
-)}\hypertarget{classNetwork_a99a198d49d4b4c6ea2c247264ff774ea}{}\label{classNetwork_a99a198d49d4b4c6ea2c247264ff774ea}
-
-
-a method that calculates the connexions each \hyperlink{classNeuron}{Neuron} sends from the connexions each \hyperlink{classNeuron}{Neuron} receives. 
-
-this second version of the network is more efficient when a neuron has to send a spike to all its receivers. 
-\begin{DoxyParams}{Parameters}
-{\em the} & group of \hyperlink{classNeuron}{Neuron} (a vector) we want the output connexions to be generated \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}

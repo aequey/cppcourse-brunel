@@ -4,7 +4,7 @@
 int main() {
 	
 	/// Create a Simulation 
-	Simulation sim(600.0, "../res/data.dat");
+	Simulation sim(1000.0, "../res/data.dat");
 
 	/// Uncomment this if you want to simulate eiher one Neuron or two neurons with a connexion
 	/*

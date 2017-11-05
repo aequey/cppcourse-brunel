@@ -26,7 +26,13 @@ Neuron::Neuron(bool excitatory)
 double Neuron::getMbPotential() const {
 	return mbPotential;
 }
+
+////////////////////////////////////////////////////////////////////////
 	
+void Neuron::setMbPotential(const Potential& potential) {
+	mbPotential = potential;
+}
+
 ////////////////////////////////////////////////////////////////////////
 
 Time Neuron::getSpikeTime() const {
@@ -103,8 +109,9 @@ bool Neuron::update(const Time& stopTime) {
 ////////////////////////////////////////////////////////////////////////
 
 void Neuron::receiveSpike(const Potential& amplitude, const Time& receptionTime) {
-	assert(receptionTime>=currentTime);
-	buffer[inBuffer(receptionTime)]+=amplitude;
+	// The equation given in lectures has not the -1, but it seems here to give a too big time with the buffer.
+	assert(receptionTime-1>=currentTime);
+	buffer[inBuffer(receptionTime-1)]+=amplitude;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -137,6 +144,5 @@ void Neuron::updatePotential(const double& extI, const Potential& J) {
 ////////////////////////////////////////////////////////////////////////
 
 unsigned int Neuron::inBuffer(const Time& time) const {
-	// The equation given in lectures has not the -1, but it seems here to give a too big time.
-	return (time-1) % (buffer.size());
+	return (time) % (buffer.size());
 }

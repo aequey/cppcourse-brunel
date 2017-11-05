@@ -6,9 +6,7 @@
 #include "Constants.h"
 
 
-///< A class that represents a neuron.
-///< They are two types of neurons : excitatory and inhibitory (the change is only in amplitude of the spike)
-
+class Neuron; ///< A class that represents a Neuron. They are two types of neurons : excitatory and inhibitory (the change is only in amplitude of the spike)
 
 class Neuron {
 public :
@@ -36,6 +34,13 @@ public :
 	 * @return the membrane potential
 	 */
 	Potential getMbPotential() const;
+	
+	/*!
+	 * @brief method that allows to change the membrane potential of the Neuron. Used in the tests to ensure it has the good value at the beginning
+	 * @param the new potential of the Neuron
+	 * @return void
+	 */
+	void setMbPotential(const Potential& potential);
 	
 	/*!
 	 * @brief returns the time of the last spike of the Neuron

@@ -15,10 +15,10 @@ namespace constants {
 	// parameters to change to reproduse Fig. 8 of the paper
 		// G = |JI|/|JE| the rate between amplitude of the spike sent by inhibitory and excitatory Neuron
 		// Brunel simulations : A) 3.0 ; B) 6.0 ; C) 5.0 ; D) 4.5
-		const double G(5.0);
+		const double G(4.5);
 		// ETA = NU_EXT/NU_THR a parameter given in Brunel's paper that indicates the quantity of neurons that are spiking from the outside
 		// Brunel simulations : A) 2.0 : B) 4.0 ; C) 2.0 ; D) 0.9
-		const double ETA(2.0);
+		const double ETA(0.9);
 
 	// general Simulation parameters
 		// The default Simulation time (in Milliseconds)
