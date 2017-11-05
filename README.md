@@ -33,18 +33,18 @@ A normal simulation runs for a simulation time of 1000 ms.
 
 Here is an indicative time that takes a simulation of 1000 ms for each of the Brunel parameters with EPFL computers :
 
-A) ~55 s
+A) ~60 s
 
 B) ~30 s
 
 C) ~20 s
 
-D) ~10 s
+D) ~15 s
 
 The time of the simulation strongly depends on the number of spikes sent in each ster of simultion.
 
 # How to use the program
-To run the simulation, first compile the program : go on build directory and type :
+To run the simulation, first compile the program : go on /build directory and type :
 
 cmake ..
 
@@ -52,15 +52,15 @@ make
 
 You can execute the simulation by typing ./main (or run the tests with ./neuronTest) in the same directory.
 
-By default, G=5 and ETA=2. If you want to change these parameters, go to the file src/Constants.h. The two parameters to modify are the first of the list. You'll have to recompile the program.
+By default, G=5 and ETA=2. If you want to change these parameters, go to the file /src/Constants.h. The two parameters to modify are the first of the list. You'll have to recompile the program.
 
-If you want to change the simulation time, go to src/main.cpp and change the parameter of the constructor of Simulation that corresponds to the time. If you want to change the name of the file of results, do it the same way.
+If you want to change the simulation time, go to /src/main.cpp and change the parameter of the constructor of Simulation that corresponds to the time. If you want to change the name of the file of results, do it the same way.
 
-res/Graph.ipynb allows you to have graphs of  the results using for example jupyter notebook.
+/res/Graph.ipynb allows you to have graphs of  the results using for example jupyter notebook. What ? Jupyter notebook is not installes in EPFL machines ? Well... That's not my problem :)
 
-The code is commented to be compatible with Doxygen. To see it go to build and type : 
+The code is commented to be compatible with Doxygen. To see it go to /build and type : 
 
 make doc
 
 Before doing this, ensure you have typed cmake ..
-You'll find the documentaton on dox/html/index.html
+You'll find the documentaton on /dox/html/index.html
