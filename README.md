@@ -3,10 +3,15 @@
 # Purpose of the program and model discussion
 We want to simulate 12500 Neurons using the model of Brunel that has been published in 2000.
 General idea of the model : 
+
 •	A neuron has a membrane potential. If it gets an external current or stimulation, this potential will change.
+
 •	If the potential reaches reaches a certain threshold, the Neuron will spike (i.e. send a signal to other neurons).
+
 •	After the spike, the potential is reset and the processus can restart.
+
 •	They are two types of neurons : excitatory send positive signals (that tend to bring the potential of the neurons that are receiving the spike closer to the threshold), and inhibitory send negative signals.
+
 •	Since we only simulate 12500 neurons (less than a mm^3 of brain), we implement randomly generated external spikes.
 
 # Simulation
@@ -16,11 +21,8 @@ A balanced network is when G and ETA are compensating each other.
 Our goal is to reproduce four results of the paper (we save the spiking times of each neuron) :
 
 A) G=3    ETA=2
-
 B) G=6	  ETA=4
-
 C) G=5	  ETA=2
-
 D) G=4.5	ETA=0.9
 
 A normal simulation runs for a simulation time of 1000 ms.
