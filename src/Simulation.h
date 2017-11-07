@@ -42,23 +42,23 @@ public :
 	Time getCurrentTime() const;
 
 	/*!
-	 * @brief 
-	 * @param 
-	 * @return 
+	 * @brief simulate a Neuron with a given external current that comes in a given interval of time 
+	 * @param the external current, and the beginning and end if the time interval
+	 * @return void
 	 */
 	void simulateANeuron(const double& extI, const Milliseconds& extIBeginning, const Milliseconds& extIEnd);
 
 	/*!
-	 * @brief 
-	 * @param 
-	 * @return 
+	 * @brief simulate two neurons and one connexion. The first one receives a given current during a given time interval
+	 * @param the external current for the first Neuron, and the beginning and end if the time interval
+	 * @return void
 	 */
 	void simulateTwoNeurons(const double& extI, const Milliseconds& extIBeginning, const Milliseconds& extIEnd);
 
 	/*!
-	 * @brief 
-	 * @param 
-	 * @return 
+	 * @brief simulate the whole network of neurons according to Brunel's model and the constants file. There is no external current
+	 * @param nothong
+	 * @return void
 	 */
 	void simulateNetwork();
 	
